@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import LoginService from'./services/Login/LoginService'
+import LogoutService from './services/Logout/LogoutService'
 function App() {
   // console.log(LoginService.login())
   return (
     <div className="App">
+      <button onClick={LogoutService.logout} >logout</button>
       <button onClick={LoginService.login} >click me</button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

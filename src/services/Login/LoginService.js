@@ -6,18 +6,17 @@ class LoginService {
 
     setTokenData = (token) => {
         const decoded = jwtDecode(token);
-        const { account, username, role } = decoded;
+        const { Account, Username, Role } = decoded.payload;
         // Store 
         localStorage.setItem("token", token);
-        localStorage.setItem("account", account);
-        localStorage.setItem("username", username);
-        localStorage.setItem("role", role);
+        localStorage.setItem("account", Account);
+        localStorage.setItem("username", Username);
+        localStorage.setItem("role", Role);
     }
 
     login = async (loginData) => {
         try {
             const result = await apiLogin(loginData);
-            console.log(result.data.data.token)
             const token = result.data.data.token;
             this.setTokenData(token);
         } catch (exception) {

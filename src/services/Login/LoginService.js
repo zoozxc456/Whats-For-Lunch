@@ -14,6 +14,20 @@ class LoginService {
         localStorage.setItem("role", Role);
     }
 
+    responseGoogleLoginSuccess = (response) => {
+        const googleProfileData = { ...response.profileObj };
+        const loginData = {
+            "loginType": "google",
+            ...googleProfileData
+        }
+        console.log(loginData);
+        // const {}
+    }
+
+    responseGoogleLoginFailure = (error) => {
+        console.log(error);
+    }
+
     login = async (loginData) => {
         try {
             const result = await apiLogin(loginData);

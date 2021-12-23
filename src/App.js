@@ -11,8 +11,8 @@ function App() {
       <GoogleLogin
           clientId={googleClientID}
           buttonText="使用 Google 登入"
-          onSuccess={LoginService.responseGoogleLoginSuccess}
-          onFailure={LoginService.responseGoogleLoginFailure}
+          onSuccess={LoginService.GoogleLoginSuccess}
+          onFailure={LoginService.GoogleLoginFailure}
           cookiePolicy={"single_host_origin"}
         />
       <button onClick={LoginService.login} >click me</button>

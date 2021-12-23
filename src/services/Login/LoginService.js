@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
 
 import { apiLogin } from '../../apis/api';
-
+import { responseGoogleLoginFailure, responseGoogleLoginSuccess } from './GoogleLoginService'
 class LoginService {
 
     setTokenData = (token) => {
@@ -14,20 +14,6 @@ class LoginService {
         localStorage.setItem("role", Role);
     }
 
-    responseGoogleLoginSuccess = (response) => {
-        const googleProfileData = { ...response.profileObj };
-        const loginData = {
-            "loginType": "google",
-            ...googleProfileData
-        }
-        console.log(loginData);
-        // const {}
-    }
-
-    responseGoogleLoginFailure = (error) => {
-        console.log(error);
-    }
-
     login = async (loginData) => {
         try {
             const result = await apiLogin(loginData);
@@ -35,10 +21,17 @@ class LoginService {
             this.setTokenData(token);
         } catch (exception) {
             console.log(exception);
+        }finally{
+            console.log(localStorage.length);
         }
-
     }
 
+    // GoogleLogin
+    GoogleLoginSuccess = async(response) => {
+        const loginData = responseGoogleLoginSuccess(response);
+        await this.login(loginData);
+    };
+    GoogleLoginFailure = (response) => responseGoogleLoginFailure(response);
 }
 
 export default new LoginService();

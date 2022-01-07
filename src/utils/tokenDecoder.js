@@ -9,4 +9,13 @@ const tokenDecoder = token => {
     }
 }
 
-export default tokenDecoder
+const LineLoginIdTokenDecoder = token=>{
+    try{
+        const LineLoginIdTokenPadload = jwtDecode(token);
+        return LineLoginIdTokenPadload;
+    }catch (e){
+        console.log('LineLoginIdToken Error');
+    }
+}
+
+export {tokenDecoder,LineLoginIdTokenDecoder}

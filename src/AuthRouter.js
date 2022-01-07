@@ -1,5 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
-import tokenDecoder from "./utils/tokenDecoder";
+import {tokenDecoder} from "./utils/tokenDecoder";
 
 const setUserRole = (token) => {
     try{

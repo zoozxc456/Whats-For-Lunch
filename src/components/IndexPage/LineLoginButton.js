@@ -3,8 +3,9 @@ import querystring from "query-string"
 import qs from "qs"
 import { useEffect } from "react"
 import { Button } from "react-bootstrap"
-// import tokenDecoder from "../../utils/tokenDecoder"
-import jwtDecode from "jwt-decode"
+import { LineLoginIdTokenDecoder } from "../../utils/tokenDecoder"
+
+
 const style = {
     background: "#00FF00"
 }
@@ -43,6 +44,47 @@ const LineLogin = ({
         window.location.href = lineAuthoriseURL;
     }
 
+    const getLineLoginAccessToken = async callbackURL => {
+
+        // Get CallbackQueryString
+        const CallbackQueryString = querystring.parseUrl(callbackURL);
+        const redirect_uri = CallbackQueryString.url;
+        const { code, state } = CallbackQueryString.query;
+
+        // Get AccessToken 
+
+        const getAccessTokenReqConfig = {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        };
+
+        const getAccessTokenReqBody = qs.stringify({
+            "grant_type": "authorization_code",
+            "code": code,
+            "redirect_uri": redirect_uri,
+            "client_id": clientID,
+            "client_secret": clientSecret
+        });
+
+        try {
+            const getAccessTokenResPayload = await axios.post('https://api.line.me/oauth2/v2.1/token',
+                getAccessTokenReqBody,
+                getAccessTokenReqConfig);
+
+            const LineLoginIdToken = getAccessTokenResPayload.id_token;
+            const LineLoginIdTokenPadload = LineLoginIdTokenDecoder(LineLoginIdToken);
+            const { name, sub } = LineLoginIdTokenPadload;
+
+            // POST BackEnd
+        } catch (e) {
+
+        }
+
+
+    }
+
+
     const getAccessToken = callbackURL => {
 
         const queryString = querystring.parseUrl(callbackURL);
@@ -65,13 +107,16 @@ const LineLogin = ({
 
         axios.post('https://api.line.me/oauth2/v2.1/token', reqBody, reqConfig)
             .then((res) => {
-                console.log(res)
                 const { id_token } = res.data;
                 try {
-                    const result = jwtDecode(id_token);
-                    console.log(result);
+                    const LineLoginIdTokenPadload = LineLoginIdTokenDecoder(id_token);
+                    return LineLoginIdTokenPadload;
                 } catch (e) {
                     console.log('token error')
+                }
+            }).then((LineLoginIdTokenPadload) => {
+                if (LineLoginIdTokenPadload) {
+
                 }
             }).catch((err) => console.log(err.response))
     }

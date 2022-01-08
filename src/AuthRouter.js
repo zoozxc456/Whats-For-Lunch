@@ -1,10 +1,10 @@
 import { Redirect, Route } from "react-router-dom";
-import {tokenDecoder} from "./utils/tokenDecoder";
+import { tokenDecoder } from "./utils/tokenDecoder";
 
 const setUserRole = (token) => {
-    try{
+    try {
         return tokenDecoder(token).Role;
-    }catch (e){
+    } catch (e) {
         return 'guest';
     }
 }
@@ -13,7 +13,7 @@ const IsAdminUser = (Role) => Role === 'admin';
 const IsGuestUser = (Role) => Role === 'guest';
 const IsMemberUser = (Role) => Role === 'member';
 
-const IsPermissonToAccess = (Role,Permission) => Role === Permission;
+const IsPermissonToAccess = (Role, Permission) => Role === Permission;
 
 
 const AuthRoute = (RouteProps) => {
@@ -23,15 +23,15 @@ const AuthRoute = (RouteProps) => {
 
     const Role = setUserRole(token) ?? 'guest';
 
-    if (IsGuestUser(Role) && !IsPermissonToAccess(Role,Permission)) {
+    if (IsGuestUser(Role) && !IsPermissonToAccess(Role, Permission)) {
         return <Redirect to="/" />
     }
 
-    if (IsMemberUser(Role) && !IsPermissonToAccess(Role,Permission)) {
+    if (IsMemberUser(Role) && !IsPermissonToAccess(Role, Permission)) {
         return <Redirect to="/Home" />;
     }
 
-    if (IsAdminUser(Role) && !IsPermissonToAccess(Role,Permission)) {
+    if (IsAdminUser(Role) && !IsPermissonToAccess(Role, Permission)) {
         return <Redirect to="/Administrator" />;
     }
 

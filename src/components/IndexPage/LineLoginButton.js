@@ -1,42 +1,40 @@
-import axios from "axios"
-import querystring from "query-string"
-import qs from "qs"
 import { useEffect } from "react"
 import { Button } from "react-bootstrap"
+import querystring from "query-string"
+import qs from "qs"
+import axios from "axios"
 import { LineLoginIdTokenDecoder } from "../../utils/tokenDecoder"
-
-
+import LoginService from "../../services/Login/LoginService"
 const style = {
     background: "#00FF00"
 }
 
-const clickHandler = () => {
-    const url = ''
-    axios.post(url, {})
-}
 
-const LineLogin = ({
-    clientID,
-    clientSecret,
-    state,
-    nonce,
-    scope,
-    setPayload,
-    setIdToken,
-    redirectURI
-}) => {
+const LineLogin = ({ onSuccess, onFailure }) => {
+
+    const client_id = "1656721614",
+        clientSecret = "bec02e7cf2fb625f1cdaef87d54cfb1a",
+        response_type = "code",
+        state = "12345abc",
+        nonce = "09876xyz",
+        scope = "profile openid email",
+        prompt = "consent",
+        max_age = 120,
+        bot_prompt = "normal",
+        redirect_uri = "http://localhost:3000/";
+
     const LineLoginInit = () => {
-        // Build Query String
+        // Create Query String
         const queryString = querystring.stringify({
-            response_type: 'code',
-            client_id: clientID,
+            response_type: response_type,
+            client_id: client_id,
             state: state,
             scope: scope,
             nonce: nonce,
-            prompt: 'consent',
-            max_age: 120,
-            bot_prompt: 'normal',
-            redirect_uri: redirectURI
+            prompt: prompt,
+            max_age: max_age,
+            bot_prompt: bot_prompt,
+            redirect_uri: redirect_uri
         });
 
         const lineAuthoriseURL = "https://access.line.me/oauth2/v2.1/authorize?" + queryString;
@@ -48,77 +46,92 @@ const LineLogin = ({
 
         // Get CallbackQueryString
         const CallbackQueryString = querystring.parseUrl(callbackURL);
-        const redirect_uri = CallbackQueryString.url;
         const { code, state } = CallbackQueryString.query;
 
         // Get AccessToken 
+        await getAcessToken(code);
 
-        const getAccessTokenReqConfig = {
+    }
+
+    const getAcessToken = async code => {
+
+        const requestURL = "https://api.line.me/oauth2/v2.1/token";
+
+        const requestConfig = {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             }
         };
 
-        const getAccessTokenReqBody = qs.stringify({
+        const requestBody = qs.stringify({
             "grant_type": "authorization_code",
             "code": code,
             "redirect_uri": redirect_uri,
-            "client_id": clientID,
+            "client_id": client_id,
             "client_secret": clientSecret
         });
 
         try {
-            const getAccessTokenResPayload = await axios.post('https://api.line.me/oauth2/v2.1/token',
-                getAccessTokenReqBody,
-                getAccessTokenReqConfig);
+            const responseBody = await axios.post(requestURL, requestBody, requestConfig);
 
-            const LineLoginIdToken = getAccessTokenResPayload.id_token;
-            const LineLoginIdTokenPadload = LineLoginIdTokenDecoder(LineLoginIdToken);
-            const { name, sub } = LineLoginIdTokenPadload;
+            const lineLoginIdToken = responseBody.data.id_token;
 
-            // POST BackEnd
+            const lineLoginIdTokenPadload = await getLineLoginIdTokenPayload(lineLoginIdToken);
+
+            await setLineLoginIdTokenPayload(lineLoginIdTokenPadload);
+
+            const lineUserProfile = await getLineUserProfile(lineLoginIdTokenPadload);
+
+            await loginSystemByLineLogin(lineUserProfile);
+
         } catch (e) {
-
+            console.log('GET LINE ID_TOKEN ERROR');
         }
-
 
     }
 
+    const getLineLoginIdTokenPayload = async id_Token => {
+        try {
+            const idTokenPadload = LineLoginIdTokenDecoder(id_Token);
+            return idTokenPadload;
+        } catch (e) {
+            console.log('LineLoginIdToken Decode Error');
+            return undefined;
+        }
+    }
 
-    const getAccessToken = callbackURL => {
+    const getLineUserProfile = async payload => {
+        const { name, sub } = payload;
+        return { LineUsername: name, LineUserID: sub };
+    }
 
-        const queryString = querystring.parseUrl(callbackURL);
-        const redirect_uri = queryString.url;
-        const { code, state } = queryString.query;
+    const setLineLoginIdTokenPayload = async payload => {
 
-        const reqConfig = {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
-        };
+    }
 
-        const reqBody = qs.stringify({
-            "grant_type": "authorization_code",
-            "code": code,
-            "redirect_uri": redirect_uri,
-            "client_id": clientID,
-            "client_secret": clientSecret
-        });
+    const loginSystemByLineLogin = async ({ LineUsername, LineUserID }) => {
 
-        axios.post('https://api.line.me/oauth2/v2.1/token', reqBody, reqConfig)
-            .then((res) => {
-                const { id_token } = res.data;
-                try {
-                    const LineLoginIdTokenPadload = LineLoginIdTokenDecoder(id_token);
-                    return LineLoginIdTokenPadload;
-                } catch (e) {
-                    console.log('token error')
-                }
-            }).then((LineLoginIdTokenPadload) => {
-                if (LineLoginIdTokenPadload) {
+        const requestBody = {
+            "loginType": "line",
+            "lineUsername": LineUsername,
+            "lineUserID": LineUserID
+        }
 
-                }
-            }).catch((err) => console.log(err.response))
+        try{
+            console.log(requestBody)
+
+            await LoginService.login(requestBody);
+            // const result = await axios.post("http://localhost:5000/user/login",requestBody,{headers:{"Content-Type":"application/json"}});
+
+            // console.log(result);
+
+
+
+            // await LoginService.login(requestBody);
+        }catch(e){
+            console.log("System Login Error");
+        }
+        
     }
 
     useEffect(() => {
@@ -126,9 +139,9 @@ const LineLogin = ({
         const queryString = querystring.parseUrl(callbackURL);
 
         if (Object.keys(queryString.query).length !== 0) {
-            getAccessToken(callbackURL);
+            getLineLoginAccessToken(callbackURL);
         }
-    }, [clientID]);
+    }, [client_id, getLineLoginAccessToken]);
 
 
     return (
@@ -137,5 +150,9 @@ const LineLogin = ({
         </Button>
     )
 }
+
+
+
+
 
 export default LineLogin;

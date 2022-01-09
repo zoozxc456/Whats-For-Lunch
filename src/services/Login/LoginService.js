@@ -32,6 +32,13 @@ class LoginService {
         await this.login(loginData);
     };
     GoogleLoginFailure = (response) => responseGoogleLoginFailure(response);
+
+    // LineLogin 
+    LineLoginSuccess = async(response)=>{
+        const lineLoginData={};
+        await this.login(lineLoginData);
+    }
+    LineLoginFailure = response =>console.log(response)
 }
 
 export default new LoginService();

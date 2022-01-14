@@ -1,0 +1,46 @@
+#LineLoginBtn {
+    display: flex;
+    margin: auto;
+    background-color: #00C300;
+    width: 100%;
+    padding: 0;
+    border: solid 1px rgba(255, 255, 255,0);
+    border-radius: 10px;
+    transition: ease-in-out .1s;
+    box-shadow:0px 7px 25px -10px black
+}
+
+#LineLoginBtn:hover {
+    opacity: 0.9;
+    transform: scale(1.03);
+}
+
+#LineLoginBtn:active{
+    transform: scale(0.98);
+    box-shadow: 0px 4px 8px #c5c2c2, 0px 0px 9px 1px #80eb80 inset;
+}
+
+
+
+#LineLoginBtn div {
+    align-self: center;
+}
+
+#iconDiv {
+    flex: 2;
+    align-self: center;
+    border-right: solid 1px #02B700;
+}
+
+#iconDiv>img {
+    width: 100%;
+}
+
+#textDiv {
+    flex: 8;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 3.5vw;
+    font-weight: 600;
+}

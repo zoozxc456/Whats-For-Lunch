@@ -23,8 +23,9 @@ const AuthRoute = (RouteProps) => {
 
     const Role = setUserRole(token) ?? 'guest';
 
+    console.log(RouteProps,token,Role);
     if (IsGuestUser(Role) && !IsPermissonToAccess(Role, Permission)) {
-        return <Redirect to="/" />
+        // return <Redirect to="/" />
     }
 
     if (IsMemberUser(Role) && !IsPermissonToAccess(Role, Permission)) {

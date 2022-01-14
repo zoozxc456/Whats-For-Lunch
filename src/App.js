@@ -4,10 +4,11 @@ import AuthRoute from "./AuthRouter";
 /* Import CSSs */
 
 /* Import Components */
-import IndexPage from './components/IndexPage/IndexPage';
-import HomePage from "./components/HomePage/HomePage";
-import OrderPage from "./components/OrderPage/OrderPage";
-import AdministratorPage from "./components/AdministratorPage/AdministratorPage";
+import IndexPage from './components/Pages/IndexPage/IndexPage';
+import LoginPage from "./components/Pages/LoginPage/LoginPage";
+import HomePage from "./components/Pages/HomePage/HomePage";
+import OrderPage from "./components/Pages/OrderPage/OrderPage";
+import AdministratorPage from "./components/Pages/AdministratorPage/AdministratorPage";
 
 function App() {
   return (
@@ -30,9 +31,15 @@ function App() {
           </AuthRoute>
 
           {/* Below Route For Guest */}
+          <AuthRoute path="/Login" Permission="guest">
+            <LoginPage />
+          </AuthRoute>
+
           <AuthRoute path="/" type="Index" Permission="guest">
             <IndexPage />
           </AuthRoute>
+
+          
 
         </Switch>
       </Router>

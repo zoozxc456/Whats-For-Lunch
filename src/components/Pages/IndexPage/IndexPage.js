@@ -1,8 +1,6 @@
 import { useState } from 'react';
 /* Import Images */
-import banner from '../../assets/images/banner.png'
-import LineLogin from './LineLoginButton'
-import LoginService from '../../services/Login/LoginService';
+import banner from '../../Assets/images/banner.png'
 const style = {
     width: "100vw"
 }
@@ -23,11 +21,7 @@ const IndexPageComponent = () => {
                 setPayload={setPayload}
                 setIdToken={setIdToken}
             /> */}
-            <LineLogin
-                onSuccess={LoginService.LineLoginSuccess}
-                onFailure={LoginService.LineLoginFailure}
-            />
-            <img src={banner} alt={'banner'} style={style} />
+            <img src={banner} alt={'banner'} style={style} loading="lazy"/>
         </>
     )
 }

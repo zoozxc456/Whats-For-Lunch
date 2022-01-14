@@ -1,13 +1,12 @@
+import LineIcon from "../../Assets/images/Line-Icon.svg"
+import "./LineLoginButton.css"
 import { useEffect } from "react"
 import { Button } from "react-bootstrap"
 import querystring from "query-string"
 import qs from "qs"
 import axios from "axios"
-import { LineLoginIdTokenDecoder } from "../../utils/tokenDecoder"
-import LoginService from "../../services/Login/LoginService"
-const style = {
-    background: "#00FF00"
-}
+import { LineLoginIdTokenDecoder } from "../../../utils/tokenDecoder"
+import LoginService from "../../../services/Login/LoginService"
 
 
 const LineLogin = ({ onSuccess, onFailure }) => {
@@ -46,7 +45,7 @@ const LineLogin = ({ onSuccess, onFailure }) => {
 
         // Get CallbackQueryString
         const CallbackQueryString = querystring.parseUrl(callbackURL);
-        const { code, state } = CallbackQueryString.query;
+        const { code } = CallbackQueryString.query;
 
         // Get AccessToken 
         await getAcessToken(code);
@@ -117,7 +116,7 @@ const LineLogin = ({ onSuccess, onFailure }) => {
             "lineUserID": LineUserID
         }
 
-        try{
+        try {
             console.log(requestBody)
 
             await LoginService.login(requestBody);
@@ -128,10 +127,10 @@ const LineLogin = ({ onSuccess, onFailure }) => {
 
 
             // await LoginService.login(requestBody);
-        }catch(e){
+        } catch (e) {
             console.log("System Login Error");
         }
-        
+
     }
 
     useEffect(() => {
@@ -141,12 +140,17 @@ const LineLogin = ({ onSuccess, onFailure }) => {
         if (Object.keys(queryString.query).length !== 0) {
             getLineLoginAccessToken(callbackURL);
         }
-    }, [client_id, getLineLoginAccessToken]);
+    }, [client_id]);
 
 
     return (
-        <Button style={style} onClick={LineLoginInit}>
-            Line
+        <Button id="LineLoginBtn" onClick={LineLoginInit}>
+            <div id="iconDiv">
+                <img alt="LineIcon" src={LineIcon} />
+            </div>
+            <div id="textDiv">
+                Login With LINE
+            </div>
         </Button>
     )
 }

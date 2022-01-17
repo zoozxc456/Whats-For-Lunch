@@ -1,13 +1,10 @@
-import LineIcon from "../../Assets/images/Line-Icon.svg"
-import "./LineLoginButton.css"
 import { useEffect } from "react"
-import { Button } from "react-bootstrap"
 import querystring from "query-string"
 import qs from "qs"
 import axios from "axios"
 import { LineLoginIdTokenDecoder } from "../../../utils/tokenDecoder"
 import LoginService from "../../../services/Login/LoginService"
-
+import LineLoginButtonView from "./LineLoginButton.view"
 
 const LineLogin = ({ onSuccess, onFailure }) => {
 
@@ -144,14 +141,7 @@ const LineLogin = ({ onSuccess, onFailure }) => {
 
 
     return (
-        <Button id="LineLoginBtn" onClick={LineLoginInit}>
-            <div id="iconDiv">
-                <img alt="LineIcon" src={LineIcon} />
-            </div>
-            <div id="textDiv">
-                Login With LINE
-            </div>
-        </Button>
+        <LineLoginButtonView onClickHandler={LineLoginInit} />
     )
 }
 

@@ -3,7 +3,7 @@ import { tokenDecoder } from "./utils/tokenDecoder";
 
 const setUserRole = (token) => {
     try {
-        return tokenDecoder(token).Role;
+        return tokenDecoder(token).role;
     } catch (e) {
         return 'guest';
     }
@@ -25,7 +25,7 @@ const AuthRoute = (RouteProps) => {
 
     console.log(RouteProps,token,Role);
     if (IsGuestUser(Role) && !IsPermissonToAccess(Role, Permission)) {
-        // return <Redirect to="/" />
+        return <Redirect to="/" />
     }
 
     if (IsMemberUser(Role) && !IsPermissonToAccess(Role, Permission)) {

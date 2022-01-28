@@ -17,7 +17,7 @@ const LineLogin = ({ onSuccess, onFailure }) => {
         prompt = "consent",
         max_age = 120,
         bot_prompt = "normal",
-        redirect_uri = "http://localhost:3000/";
+        redirect_uri = "http://localhost:3000/Login";
 
     const LineLoginInit = () => {
         // Create Query String

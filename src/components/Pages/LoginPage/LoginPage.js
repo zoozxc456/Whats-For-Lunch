@@ -3,6 +3,7 @@ import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginPage.css'
 import LineLogin from "../../Buttons/LineLoginButton/LineLoginButton";
+import LoginService from "../../../services/Login/LoginService";
 const LoginPage = (props) => {
     const [validated, setValidate] = useState(false);
     const [email, setEmail] = useState("");
@@ -10,13 +11,21 @@ const LoginPage = (props) => {
 
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         setValidate(true);
-        const reqBody = JSON.stringify({
+        const reqBody = {
             "email": email,
-            "passowrd": password,
-            "loginType": "system"
-        });
+            "password": password,
+            "loginType": "original"
+        };
+
+        const loginResult = await LoginService.login(reqBody);
+
+        if (loginResult){
+            window.location.href="/Home"
+        }
+        // console.log(await LoginService.login(reqBody))
+
         console.log(reqBody);
     }
 

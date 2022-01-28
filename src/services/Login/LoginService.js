@@ -4,41 +4,45 @@ import { apiLogin } from '../../apis/api';
 import { responseGoogleLoginFailure, responseGoogleLoginSuccess } from './GoogleLoginService'
 class LoginService {
 
-    setTokenData = (token) => {
+    setTokenData = async (token) => {
         const decoded = jwtDecode(token);
-        const { Account, Username, Role } = decoded.payload;
+        console.log(decoded)
+        const { email, username, role } = decoded;
         // Store 
         localStorage.setItem("token", token);
-        localStorage.setItem("account", Account);
-        localStorage.setItem("username", Username);
-        localStorage.setItem("role", Role);
+        localStorage.setItem("email", email);
+        localStorage.setItem("username", username);
+        localStorage.setItem("role", role);
     }
 
     login = async (loginData) => {
         try {
             const result = await apiLogin(loginData);
-            const token = result.data.data.token;
-            this.setTokenData(token);
+            console.log(result)
+            const token = result.data.payload.accessToken;
+            console.log(token)
+            await this.setTokenData(token);
         } catch (exception) {
             console.log(exception);
-        }finally{
-            console.log(localStorage.length);
+        } finally {
+
+            return localStorage.length === 4;
         }
     }
 
     // GoogleLogin
-    GoogleLoginSuccess = async(response) => {
+    GoogleLoginSuccess = async (response) => {
         const loginData = responseGoogleLoginSuccess(response);
         await this.login(loginData);
     };
     GoogleLoginFailure = (response) => responseGoogleLoginFailure(response);
 
     // LineLogin 
-    LineLoginSuccess = async(response)=>{
-        const lineLoginData={};
+    LineLoginSuccess = async (response) => {
+        const lineLoginData = {};
         await this.login(lineLoginData);
     }
-    LineLoginFailure = response =>console.log(response)
+    LineLoginFailure = response => console.log(response)
 }
 
 export default new LoginService();

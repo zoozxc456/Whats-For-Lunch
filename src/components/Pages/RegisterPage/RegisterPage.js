@@ -1,7 +1,8 @@
 import { Col, Form, Button, ButtonGroup } from "react-bootstrap";
 import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import RegisterService from "../../../services/Register/Register.service";
+import React from 'react';
 const RegisterPage = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -27,11 +28,12 @@ const RegisterPage = (props) => {
         return fieldErrorList.indexOf(field) !== -1
     }
 
-    const handleSignUpClick = event => {
+    const handleSignUpClick = async event => {
 
         if (checkSignUpFormData()) {
-
+            await registerAndLogin();
         }
+
     }
 
     const handleLogInClick = event => {
@@ -72,6 +74,25 @@ const RegisterPage = (props) => {
 
     const usernameIsMeetRule = () => {
         return username.length > 0;
+    }
+
+    const registerAndLogin = async ()=>{
+
+        const registerReqBody = {
+            "name": username,
+            "email": email,
+            "password": password,
+            "role": "user"
+        }
+
+        try {
+            const accessToken = await RegisterService.register(registerReqBody);
+
+            localStorage.setItem("accessToken", accessToken);
+        }
+        catch (exception) {
+            console.log(exception);
+        }
     }
 
     return (

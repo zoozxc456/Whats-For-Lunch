@@ -1,0 +1,281 @@
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
+@font-face {
+    font-family: 'jf open 粉圓字型';
+    src: url('../../Assets/fonts/jf-openhuninn-1.1.ttf');
+    unicode-range: U+4E00-9FFF;
+}
+/* @font-face {
+    font-family: 'Hanna', sans-serif ;
+    src: url(//fonts.googleapis.com/earlyaccess/hanna.css);
+    unicode-range: U+00-024F;
+} */
+* {
+    font-family: 'jf open 粉圓字型';
+    transition: all 0.8s ease !important;
+}
+
+#home {
+    background-color: #FFFCF8;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#home .main {
+    width: 800px;
+    display: grid;
+}
+
+#home .main * {
+    text-align: center;
+    margin: 0;
+}
+
+#home .logo {
+    width: 10vw;
+}
+.logo.active{
+    width: 8vw;
+}
+
+#home .title * {
+    opacity: 0%;
+    font-size: 5vw;
+    color: #6C5E45;
+    font-family: 'Hanna', sans-serif !important;
+    /* animation 參數設定 */
+    animation-name: fadeInUp;
+    /*動畫名稱，需與 keyframe 名稱對應*/
+    animation-duration: 1s;
+    /*動畫持續時間，單位為秒*/
+    animation-fill-mode: forwards;
+    /*動畫停在最後一個影格上*/
+    animation-delay: 1s;
+    /*動畫延遲開始時間*/
+}
+
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 100%;
+    }
+}
+
+#home .bottom button {
+    opacity: 0%;
+    width: 120px;
+    border: 3px solid #6C5E45;
+    border-radius: 18px;
+    /* animation 參數設定 */
+    animation-name: fadeInUp;
+    /*動畫名稱，需與 keyframe 名稱對應*/
+    animation-duration: 1s;
+    /*動畫持續時間，單位為秒*/
+    animation-fill-mode: forwards;
+    /*動畫停在最後一個影格上*/
+    animation-delay: 1.5s;
+    /*動畫延遲開始時間*/
+}
+
+#home .about-btn {
+    color: #6C5E45;
+    background-color: #FFFCF8;
+}
+
+#home .login-btn {
+    color: #fff;
+    background-color: #6C5E45;
+}
+
+#home .line {
+    border: 1px solid #AA9D87;
+    max-width: 80vw;
+    /* animation 參數設定 */
+    animation-name: openLine;
+    /*動畫名稱，需與 keyframe 名稱對應*/
+    animation-duration: 1s;
+    /*動畫持續時間，單位為秒*/
+    animation-fill-mode: forwards;
+    /*動畫停在最後一個影格上*/
+}
+
+@keyframes openLine {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 85%;
+    }
+}
+
+#home .middle_before * {
+    opacity: 0%;
+    color: #6C5E45;
+    /* animation 參數設定 */
+    animation-name: fadeInDown;
+    /*動畫名稱，需與 keyframe 名稱對應*/
+    animation-duration: 1s;
+    /*動畫持續時間，單位為秒*/
+    animation-fill-mode: forwards;
+    /*動畫停在最後一個影格上*/
+    animation-delay: 1s;
+    /*動畫延遲開始時間*/
+}
+
+@keyframes fadeInDown {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 100%;
+    }
+}
+
+#home .middle_after {
+    background-color: #fff;
+    border: 1px solid #AA9D87;
+    border-radius: 25px;
+    color: #AA9D87;
+}
+
+#home .middle_after span{
+    font-family: 'Hanna', sans-serif !important;
+}
+
+#home .login_block .login {
+    color: #6C5E45;
+    font-weight: 600;
+}
+
+#home .middle_after input {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #AA9D87;
+    color: #AA9D87;
+    text-align: left !important;
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #AA9D87;
+}
+
+#home .middle_after .forget_txt {
+    text-align: right !important;
+}
+
+#home .line2 {
+    border-bottom: 1px solid #AA9D87;
+    max-width: 90vw;
+}
+
+#home .middle_after button {
+    width: 250px;
+    background-color: #fff;
+    border-radius: 25px;
+    border: 1px solid #AA9D87;
+    color: #AA9D87;
+}
+
+
+
+#home .pizza {
+    width: 45vw;
+    position: fixed;
+    top: -190px;
+    left: -90px;
+    /* animation 參數設定 */
+    animation-name: fadeInRight;
+    /*動畫名稱，需與 keyframe 名稱對應*/
+    animation-duration: 1s;
+    /*動畫持續時間，單位為秒*/
+    animation-fill-mode: forwards;
+    /*動畫停在最後一個影格上*/
+}
+
+@keyframes fadeInRight {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateX(0px);
+        opacity: 30%;
+    }
+}
+
+#home .rice {
+    width: 25vw;
+    position: fixed;
+    bottom: -50px;
+    right: -50px;
+    /* animation 參數設定 */
+    animation-name: fadeInLeft;
+    /*動畫名稱，需與 keyframe 名稱對應*/
+    animation-duration: 1s;
+    /*動畫持續時間，單位為秒*/
+    animation-fill-mode: forwards;
+    /*動畫停在最後一個影格上*/
+}
+
+@keyframes fadeInLeft {
+    0% {
+        transform: translateX(50px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateX(0px);
+        opacity: 30%;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    #home .logo {
+        width: 20vw;
+    }
+
+    #home .title * {
+        font-size: 10vw;
+    }
+
+    #home .pizza {
+        width: 60vw;
+        top: -100px;
+        left: -50px;
+    }
+
+    #home .rice {
+        width: 40vw;
+        bottom: -50px;
+        right: -50px;
+    }
+}
+
+@media screen and (max-width: 486px) {
+    #home .pizza {
+        width: 70vw;
+        top: -70px;
+        left: -30px;
+    }
+
+    #home .rice {
+        width: 50vw;
+        bottom: -30px;
+        right: -30px;
+    }
+}

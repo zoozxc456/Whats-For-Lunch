@@ -1,6 +1,9 @@
-import { Col, Form, Button, ButtonGroup } from "react-bootstrap";
+import logo2 from '../../Assets/images/logo2.png';
+import back from '../../Assets/images/back.png';
+import { Row, Col, Form, Button, ButtonGroup } from "react-bootstrap";
 import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './RegisterPage.css';
 
 const RegisterPage = (props) => {
     const [email, setEmail] = useState("");
@@ -35,7 +38,7 @@ const RegisterPage = (props) => {
     }
 
     const handleLogInClick = event => {
-        window.location.href = "/Login"
+        window.location.href = "/"
     }
 
     const checkSignUpFormData = () => {
@@ -75,66 +78,102 @@ const RegisterPage = (props) => {
     }
 
     return (
-        <div className="container d-flex justify-content-center">
-            <Form id="SignUpForm" className="align-self-center mx-auto w-75 border p-3">
-                {/* E-mail Field */}
-                <Form.Group as={Col} className={""}>
-                    <div className="">
-                        <Form.Label className="me-3">E-mail</Form.Label>
-                    </div>
+        <div>
+            <div id="header" className="">
+                <Row>
+                    <Col>
+                        <img src={logo2} className={`logo2`} alt="logo" />
+                    </Col>
+                </Row>
+            </div>
+            <div id="register" className="mx-auto my-0">
+                <Row className="text-center">
+                    <Col xs={2} className='my-5 fs-3 p-0'>
+                        <img src={back} className={`back`} alt="back" onClick={handleLogInClick}/>
+                    </Col>
+                    <Col xs={8} className='my-5 fs-3 p-0'>
+                        註冊
+                        <span> Sign up</span>
+                    </Col>
+                    <Col xs={2} className='my-5 fs-3 p-0'>
 
-                    <Form.Control
-                        type="email"
-                        required
-                        placeholder="name@mail.com"
-                        onChange={handleEmailChangeEvent}
-                        isInvalid={handleIsInvalid("Email")}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Please Enter Your E-mail
-                    </Form.Control.Feedback>
-                </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="m-0">
+                    <Form id="SignUpForm" className="align-self-center mx-auto w-75">
+                        {/* E-mail Field */}
+                        <Form.Group as={Col} className={""}>
+                            <div className="">
+                                <Form.Label className="me-3">E-mail</Form.Label>
+                            </div>
 
-                {/* Password Field */}
-                <Form.Group as={Col} className={""}>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        required
-                        placeholder="6+ Characters, 1 Capital letter"
-                        onChange={handlePasswordChangeEvent}
-                        isInvalid={handleIsInvalid("Password")}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Please Enter Your Password
-                    </Form.Control.Feedback>
-                </Form.Group>
+                            <Form.Control
+                                type="email"
+                                required
+                                placeholder="name@mail.com"
+                                onChange={handleEmailChangeEvent}
+                                isInvalid={handleIsInvalid("Email")}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please Enter Your E-mail
+                            </Form.Control.Feedback>
+                        </Form.Group>
 
-                {/* Username Field */}
-                <Form.Group as={Col} className={""}>
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        type="text"
-                        required
-                        placeholder="Fill in your username"
-                        onChange={handleUsernameChangeEvent}
-                        isInvalid={handleIsInvalid("Username")}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Please Enter Your Username
-                    </Form.Control.Feedback>
-                </Form.Group>
+                        {/* Username Field */}
+                        <Form.Group as={Col} className={"mt-2"}>
+                            <Form.Label>使用者名稱</Form.Label>
+                            <Form.Control
+                                type="text"
+                                required
+                                placeholder="Fill in your username"
+                                onChange={handleUsernameChangeEvent}
+                                isInvalid={handleIsInvalid("Username")}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please Enter Your Username
+                            </Form.Control.Feedback>
+                        </Form.Group>
 
-                <ButtonGroup className="w-100">
-                    <Button type="button" className="me-1" onClick={handleSignUpClick}>Sign Up</Button>
+                        {/* Password Field */}
+                        <Form.Group as={Col} className={"mt-2"}>
+                            <Form.Label>密碼</Form.Label>
+                            <Form.Control
+                                type="password"
+                                required
+                                placeholder="6+ Characters, 1 Capital letter"
+                                onChange={handlePasswordChangeEvent}
+                                isInvalid={handleIsInvalid("Password")}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please Enter Your Password
+                            </Form.Control.Feedback>
+                        </Form.Group>
 
-                    <Button type="button" className="ms-1" onClick={handleLogInClick}>Log In</Button>
-                </ButtonGroup>
+                        {/* Password Field */}
+                        <Form.Group as={Col} className={"mt-2"}>
+                            <Form.Label>確認密碼</Form.Label>
+                            <Form.Control
+                                type="password"
+                                required
+                                placeholder="6+ Characters, 1 Capital letter"
+                                onChange={handlePasswordChangeEvent}
+                                isInvalid={handleIsInvalid("Password")}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please Enter Your Password
+                            </Form.Control.Feedback>
+                        </Form.Group>
 
 
-            </Form>
+                        <ButtonGroup className="w-100 mt-3">
+                            <Button type="button" className="me-1" onClick={handleSignUpClick}>註冊</Button>
+                        </ButtonGroup>
+
+
+                    </Form>
+                </Row>
+            </div>
         </div>
-
     )
 }
 

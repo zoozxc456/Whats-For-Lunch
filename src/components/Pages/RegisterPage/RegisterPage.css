@@ -1,0 +1,48 @@
+#header {
+    background-color: #FFFCF8;
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 2px #AA9D87;
+}
+
+#header .logo2 {
+    width: 25vh;
+}
+
+#register {
+    height: 88vh;
+    width: 60vw;
+    box-shadow: 0px 2px 2px #AA9D87;
+}
+
+#register * {
+    color: #6C5E45;
+}
+
+#register .back {
+    width: 5vh;
+}
+
+#register span {
+    font-family: 'Hanna', sans-serif;
+}
+
+#register button {
+    background-color: #AA9D87;
+    border-radius: 10px;
+    color: #fff;
+    border: none;
+}
+
+#register button:hover {
+    background-color: #6C5E45;
+    cursor: pointer;
+}
+
+@media screen and (max-width:768px) {
+    #register {
+        width: 100vw;
+    }
+}

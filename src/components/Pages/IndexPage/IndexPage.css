@@ -3,16 +3,15 @@
 @font-face {
     font-family: 'jf open 粉圓字型';
     src: url('../../Assets/fonts/jf-openhuninn-1.1.ttf');
-    unicode-range: U+4E00-9FFF;
 }
-/* @font-face {
-    font-family: 'Hanna', sans-serif ;
-    src: url(//fonts.googleapis.com/earlyaccess/hanna.css);
-    unicode-range: U+00-024F;
-} */
+
 * {
     font-family: 'jf open 粉圓字型';
-    transition: all 0.8s ease !important;
+    transition: all 0.8s ease;
+}
+::selection {
+	background: #6C5E45;
+	color: #fff;
 }
 
 #home {
@@ -36,9 +35,10 @@
 #home .logo {
     width: 10vw;
 }
-.logo.active{
+
+/* .logo.active{
     width: 8vw;
-}
+} */
 
 #home .title * {
     opacity: 0%;
@@ -149,17 +149,19 @@
     color: #AA9D87;
 }
 
-#home .middle_after span{
-    font-family: 'Hanna', sans-serif !important;
-}
 
 #home .login_block .login {
     color: #6C5E45;
     font-weight: 600;
 }
 
+#home .middle_after span {
+    font-family: 'Hanna', sans-serif !important;
+    font-weight: 400 !important;
+}
+
 #home .middle_after input {
-    width: 300px;
+    width: 422px;
     background-color: #fff;
     border-radius: 10px;
     border: 1px solid #AA9D87;
@@ -172,8 +174,13 @@
     color: #AA9D87;
 }
 
-#home .middle_after .forget_txt {
+#home .middle_after .function_txt {
+    justify-self: center;
     text-align: right !important;
+}
+#home .middle_after .function_txt span:hover {
+    color: #6C5E45;
+    cursor: pointer;
 }
 
 #home .line2 {
@@ -189,7 +196,15 @@
     color: #AA9D87;
 }
 
+#home .about_block div {
+    width: 422px;
+    height: 260px;
+}
 
+#home .byWHO {
+    color: #FFBCA7;
+    text-align: right !important;
+}
 
 #home .pizza {
     width: 45vw;
@@ -253,6 +268,14 @@
         font-size: 10vw;
     }
 
+    #home .logo_active {
+        width: 10vw !important;
+    }
+
+    #home .title_active * {
+        font-size: 8vw !important;
+    }
+
     #home .pizza {
         width: 60vw;
         top: -100px;
@@ -263,6 +286,14 @@
         width: 40vw;
         bottom: -50px;
         right: -50px;
+    }
+
+    #home .about_block div {
+        width: 300px;
+    }
+
+    #home .middle_after input {
+        width: 300px;
     }
 }
 
@@ -278,4 +309,22 @@
         bottom: -30px;
         right: -30px;
     }
+
+    #home .about_block div {
+        width: 250px;
+    }
+
+    #home .middle_after input {
+        width: 250px;
+    }
+}
+
+#home .logo_active {
+    width: 5vw;
+    cursor: pointer;
+}
+
+#home .title_active * {
+    font-size: 3vw;
+    cursor: pointer;
 }

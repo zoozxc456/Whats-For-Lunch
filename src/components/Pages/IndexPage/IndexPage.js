@@ -20,7 +20,7 @@ const LoginComponent = (
             <input className='py-1 ps-2' placeholder='電子郵件帳號'></input>
         </div>
         <div className='my-1'>
-            <input className='py-1 ps-2' placeholder='密碼'></input>
+            <input className='py-1 ps-2' placeholder='密碼' type={"password"}></input>
         </div>
         <div className='function_txt fs-6 my-2'>
             <span onClick={handleRegister}>註冊</span> | <span onClick={handleRegister}>忘記密碼？</span>
@@ -80,7 +80,7 @@ const IndexPageComponent = () => {
 
         <div id="home" >
             <div className="main mx-auto py-2">
-                <img src={pizza} className="pizza hot_1" alt="pizza" />
+                <img src={pizza} className="pizza" alt="pizza" />
                 <img src={rice} className="rice" alt="rice" />
                 <Row className="title" onClick={removeContent}>
                     <Col>

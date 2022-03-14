@@ -195,7 +195,9 @@
     border: 1px solid #AA9D87;
     color: #AA9D87;
 }
-
+.login_block Button:hover{
+    box-shadow: 3px 3px 0px #AA9D87;
+}
 #home .about_block div {
     width: 422px;
     height: 260px;

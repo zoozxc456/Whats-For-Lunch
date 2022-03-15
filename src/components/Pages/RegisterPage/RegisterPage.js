@@ -1,9 +1,12 @@
-import logo2 from '../../Assets/images/logo2.png';
+
 import back from '../../Assets/images/back.png';
+
 import { Row, Col, Form, Button, ButtonGroup } from "react-bootstrap";
 import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
+import Header from '../Header/Header';
+import Aside from '../Aside/Aside';
 
 const RegisterPage = (props) => {
     const [email, setEmail] = useState("");
@@ -79,20 +82,15 @@ const RegisterPage = (props) => {
 
     return (
         <div>
-            <div id="header" className="">
-                <Row>
-                    <Col>
-                        <img src={logo2} className={`logo2`} alt="logo" />
-                    </Col>
-                </Row>
-            </div>
+            <Header/>
+            <Aside/>
             <div id="register" className="mx-auto my-0">
                 <Row className="text-center">
                     <Col xs={2} className='my-5 fs-3 p-0'>
-                        <img src={back} className={`back`} alt="back" onClick={handleLogInClick}/>
+                        <img src={back} className={`back`} alt="back" onClick={handleLogInClick} />
                     </Col>
                     <Col xs={8} className='my-5 fs-3 p-0'>
-                        註冊
+                        <b>註冊</b>
                         <span> Sign up</span>
                     </Col>
                     <Col xs={2} className='my-5 fs-3 p-0'>
@@ -166,7 +164,7 @@ const RegisterPage = (props) => {
 
 
                         <ButtonGroup className="w-100 mt-3">
-                            <Button type="button" className="me-1" onClick={handleSignUpClick}>註冊</Button>
+                            <Button type="button" className="me-1" onClick={handleSignUpClick}> 註冊 <span></span></Button>
                         </ButtonGroup>
 
 

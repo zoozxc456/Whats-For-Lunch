@@ -9,14 +9,18 @@
     font-family: 'jf open 粉圓字型';
     transition: all 0.8s ease;
 }
-::selection {
-	background: #6C5E45;
-	color: #fff;
-}
 
+::selection {
+    background: #6C5E45;
+    color: #fff;
+}
+body{
+    /* background-color: #FFFCF8 !important; */
+}
 #home {
     background-color: #FFFCF8;
     height: 100vh;
+    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -148,7 +152,6 @@
 
 #home .login_block .login {
     color: #6C5E45;
-    font-weight: 600;
 }
 
 #home .middle_after span {
@@ -174,6 +177,7 @@
     justify-self: center;
     text-align: right !important;
 }
+
 #home .middle_after .function_txt span:hover {
     color: #6C5E45;
     cursor: pointer;
@@ -191,9 +195,19 @@
     border: 1px solid #AA9D87;
     color: #AA9D87;
 }
-.login_block Button:hover{
-    box-shadow: 3px 3px 0px #AA9D87;
+
+.login_block Button:hover {
+    /* box-shadow: 3px 3px 0px #AA9D87 !important;  */
 }
+
+.google_btn:hover {
+    box-shadow: 3px 3px 0px #FFC940;
+}
+
+.line_btn:hover {
+    box-shadow: 3px 3px 0px #FFBCA7;
+}
+
 #home .about_block div {
     width: 422px;
     height: 260px;
@@ -325,4 +339,11 @@
 #home .title_active * {
     font-size: 3vw;
     cursor: pointer;
+}
+
+#Copyright {
+    color: #AA9D87;
+    position: fixed !important;
+    bottom: 0px !important;
+    text-align: center;
 }

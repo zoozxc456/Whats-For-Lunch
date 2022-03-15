@@ -20,7 +20,6 @@ body{
 #home {
     background-color: #FFFCF8;
     height: 100vh;
-    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -210,12 +209,13 @@ body{
 
 #home .about_block div {
     width: 422px;
-    height: 260px;
+    height: 256px;
 }
 
 #home .byWHO {
     color: #FFBCA7;
-    text-align: right !important;
+    text-align: right;
+    height: min-content !important;
 }
 
 #home .pizza {
@@ -328,6 +328,9 @@ body{
 
     #home .middle_after input {
         width: 250px;
+    }
+    #home .byWHO {
+        text-align: center;
     }
 }
 

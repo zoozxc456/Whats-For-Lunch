@@ -12,7 +12,8 @@ const handleRegister = (event) => {
 }
 const LoginComponent = (
     <Col className="login_block">
-        <div className='login mt-5'>登入
+        <div className='login mt-5'>
+            <b>登入</b>
             <span>Login</span>
 
         </div>
@@ -24,19 +25,19 @@ const LoginComponent = (
         </div>
         <div className='function_txt fs-6 my-2'>
             <span onClick={handleRegister}>註冊</span> | <span onClick={handleRegister}>忘記密碼？</span>
-            
+
         </div>
         <div className="line2 mx-auto"></div>
         <div className='mb-5'>
             <div className="mb-2 mt-3">
                 <div className="my-1">
-                    <Button className="fs-6">
+                    <Button className="google_btn fs-6">
                         <img src={google} className="me-1" alt="google" style={{ width: '17px' }} />
                         使用Google帳號登入
                     </Button>
                 </div>
                 <div className="my-1">
-                    <Button className="fs-6">
+                    <Button className="line_btn fs-6">
                         <img src={line} className="me-3" alt="line" style={{ width: '19px' }} />
                         使用LINE帳號登入
                     </Button>
@@ -75,7 +76,7 @@ const IndexPageComponent = () => {
     const showLogin = () => {
         setContent(LoginComponent)
     }
-    
+
     return (
 
         <div id="home" >
@@ -105,6 +106,11 @@ const IndexPageComponent = () => {
                     <Col className="my-1"><Button className="about-btn fs-5" onClick={showAboutUs}>關於我們</Button></Col>
                     <Col className="my-1"><Button className="login-btn fs-5" onClick={showLogin}>登入</Button></Col>
                 </Row>
+
+
+            </div>
+            <div id="Copyright" className={`${content ? 'd-none' : ''}`}>
+                Copyright © 2022 All Rights Reserved.
             </div>
         </div>
     );

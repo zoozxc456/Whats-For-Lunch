@@ -7,4 +7,4 @@
 This Project was started by 
 [MingYu (CHIANG,MING-YU)](https://www.instagram.com/zoozxc456)
 [Peter (LIAO,JIAN-RONG)](https://www.instagram.com/jianrongl)
-[Jasmy (LIN,JYUN-RONG)](https://www.instagram.com/jasmy0910)
+[Jasmy (LIN,JYUN-RONG)](https://github.com/jasmy0910)

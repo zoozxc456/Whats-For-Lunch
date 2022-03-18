@@ -1,0 +1,24 @@
+#notify {
+    position: fixed;
+    bottom: 20px;
+    width: 60px;
+    border-radius: 50px;
+    background-color: rgb(255, 255, 255);
+    border: 3px solid #AA9D87;
+    /* height: 600px; */
+    right: 2vw;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+#notify * {
+    color: #6C5E45;
+}
+/* #notify .title {
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 50px;
+    background-color: #6C5E45;
+} */

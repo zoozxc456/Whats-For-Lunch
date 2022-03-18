@@ -1,23 +1,23 @@
-#register {
+#under_index {
     height: 88vh;
     width: 60vw;
     box-shadow: 0px 2px 2px #AA9D87;
 }
 
-#register * {
+#under_index * {
     color: #6C5E45;
 }
 
-#register .back {
+#under_index .back {
     width: 5vh;
     cursor: pointer;
 }
 
-#register span {
+#under_index span {
     font-family: 'Hanna', sans-serif;
 }
 
-#register input {
+#under_index input {
     border: 1px solid #AA9D87;
 }
 
@@ -26,26 +26,26 @@
     color: #AA9D87 !important;
 }
 
-#register button {
+#under_index button {
     background-color: #AA9D87;
     border-radius: 10px;
     color: #fff;
     border: none;
 }
 
-#register button:hover {
+#under_index button:hover {
     background-color: #6C5E45;
 }
 
 /* button animation */
-#register button span {
+#under_index button span {
     color: #fff;
     display: inline-block;
     position: relative;
     transition: 0.5s;
 }
 
-#register button span:after {
+#under_index button span:after {
     content: "Create!";
     position: absolute;
     opacity: 0;
@@ -54,17 +54,17 @@
     transition: 0.5s;
 }
 
-#register button:hover span {
+#under_index button:hover span {
     padding-left: 60px;
 }
 
-#register button:hover span:after {
+#under_index button:hover span:after {
     opacity: 1;
     left: 0;
 }
 
 @media screen and (max-width:768px) {
-    #register {
+    #under_index {
         width: 100vw;
         height: 100vh;
     }

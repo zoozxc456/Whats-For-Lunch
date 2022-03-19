@@ -46,12 +46,19 @@
 }
 
 #under_index button span:after {
-    content: "Create!";
     position: absolute;
     opacity: 0;
     top: -18px;
     left: -10px;
     transition: 0.5s;
+}
+
+#register button span:after {
+    content: "Create!";
+}
+
+#forgetpwd button span:after {
+    content: "Next!";
 }
 
 #under_index button:hover span {

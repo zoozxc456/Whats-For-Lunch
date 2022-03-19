@@ -7,60 +7,6 @@ import './IndexPage.css';
 import React, { useState } from 'react';
 import { Col, Row, Button } from "react-bootstrap";
 
-const handleRegister = (event) => {
-    window.location.href = "/register"
-}
-const LoginComponent = (
-    <Col className="login_block">
-        <div className='login mt-5'>
-            <b>登入</b>
-            <span>Login</span>
-
-        </div>
-        <div className='my-1'>
-            <input className='py-1 ps-2' placeholder='電子郵件帳號'></input>
-        </div>
-        <div className='my-1'>
-            <input className='py-1 ps-2' placeholder='密碼' type={"password"}></input>
-        </div>
-        <div className='function_txt fs-6 my-2'>
-            <span onClick={handleRegister}>註冊</span> | <span onClick={handleRegister}>忘記密碼？</span>
-
-        </div>
-        <div className="line2 mx-auto"></div>
-        <div className='mb-5'>
-            <div className="mb-2 mt-3">
-                <div className="my-1">
-                    <Button className="google_btn fs-6">
-                        <img src={google} className="me-1" alt="google" style={{ width: '17px' }} />
-                        使用Google帳號登入
-                    </Button>
-                </div>
-                <div className="my-1">
-                    <Button className="line_btn fs-6">
-                        <img src={line} className="me-3" alt="line" style={{ width: '19px' }} />
-                        使用LINE帳號登入
-                    </Button>
-                </div>
-            </div>
-        </div>
-    </Col>
-);
-
-const AboutUsComponent = (
-    < Col className="about_block" >
-        <div className='my-5'>
-            <span style={{ 'color': '#FFC940' }}>What's for Lunch?</span>
-            是專為團體訂餐
-            設計的線上訂購系統，省去單獨記錄的
-            時間，給使用者快速便利的訂餐模式，
-            一起讓揪團訂餐變得更輕鬆吧！
-            <div className='byWHO mt-5'><span>By </span>開發團隊</div>
-        </div>
-    </Col >
-);
-
-
 
 const IndexPageComponent = () => {
     // const [payload, setPayload] = useState(null);
@@ -77,6 +23,63 @@ const IndexPageComponent = () => {
         setContent(LoginComponent)
     }
 
+    const handleRegister = (event) => {
+        window.location.href = "/register?content=register"
+    }
+    const handleForgetPassword = (event) => {
+        window.location.href = "/register?content=forgetpassword"
+    }
+    const LoginComponent = (
+        <Col className="login_block">
+            <div className='login mt-5'>
+                <b>登入</b>
+                <span>Login</span>
+    
+            </div>
+            <div className='my-1'>
+                <input className='py-1 ps-2' placeholder='電子郵件帳號'></input>
+            </div>
+            <div className='my-1'>
+                <input className='py-1 ps-2' placeholder='密碼' type={"password"}></input>
+            </div>
+            <div className='function_txt fs-6 my-2'>
+                <span onClick={handleRegister}>註冊</span> | <span onClick={handleForgetPassword}>忘記密碼？</span>
+    
+            </div>
+            <div className="line2 mx-auto"></div>
+            <div className='mb-5'>
+                <div className="mb-2 mt-3">
+                    <div className="my-1">
+                        <Button className="google_btn fs-6">
+                            <img src={google} className="me-1" alt="google" style={{ width: '17px' }} />
+                            使用Google帳號登入
+                        </Button>
+                    </div>
+                    <div className="my-1">
+                        <Button className="line_btn fs-6">
+                            <img src={line} className="me-3" alt="line" style={{ width: '19px' }} />
+                            使用LINE帳號登入
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </Col>
+    );
+    
+    const AboutUsComponent = (
+        < Col className="about_block" >
+            <div className='my-5'>
+                <span style={{ 'color': '#FFC940' }}>What's for Lunch?</span>
+                是專為團體訂餐
+                設計的線上訂購系統，省去單獨記錄的
+                時間，給使用者快速便利的訂餐模式，
+                一起讓揪團訂餐變得更輕鬆吧！
+                <div className='byWHO mt-5'><span>By </span>開發團隊</div>
+            </div>
+        </Col >
+    );
+    
+    
     return (
 
         <div id="home" >

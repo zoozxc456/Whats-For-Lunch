@@ -11,6 +11,7 @@
     align-self: center;
     justify-content: center;
     z-index: 3;
+    cursor: pointer;
 }
 
 #notify * {

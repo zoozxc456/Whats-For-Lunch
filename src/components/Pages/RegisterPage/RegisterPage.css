@@ -33,6 +33,12 @@
     border: none;
 }
 
+.code_text {
+    text-align: right;
+    color: #AA9D87 !important;
+    cursor: pointer;
+}
+
 #under_index button:hover {
     background-color: #6C5E45;
 }
@@ -68,6 +74,38 @@
 #under_index button:hover span:after {
     opacity: 1;
     left: 0;
+}
+
+#forgetpwd .number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    /* text-align: center; */
+}
+
+#forgetpwd .number .col-1 {
+    background-color: #AA9D87;
+    border-radius: 20px;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+}
+
+#forgetpwd .number .now {
+    background-color: #6C5E45 !important;
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 18px !important;
+}
+
+.step4 {
+    text-align: center;
+    padding: 30vh;
+}
+.step4 .txt{
+    color: #AA9D87 !important;
 }
 
 @media screen and (max-width:768px) {

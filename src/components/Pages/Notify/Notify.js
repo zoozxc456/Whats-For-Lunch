@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import { Col, Row, Button } from "react-bootstrap";
 
 
-
 const NotifyComponent = () => {
     const [height, setHeight] = useState('60px');
     const [width, setWidth] = useState('60px');

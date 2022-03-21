@@ -17,6 +17,11 @@ const RegisterPage = () => {
     const [username, setUsername] = useState("");
     const [fieldErrorList, setFieldErrorList] = useState([]);
 
+    function goIndexPage() {
+        return new Promise(() => {
+            setTimeout(() => window.location.href = "/", 3000);
+        });
+    }
     const showForgetPwd1 = () => {
         setContent(ForgetPwdComponent1);
     }
@@ -27,6 +32,7 @@ const RegisterPage = () => {
         setContent(ForgetPwdComponent3);
     }
     const showForgetPwd4 = () => {
+        goIndexPage();
         setContent(ForgetPwdComponent4);
     }
     const showRegister = () => {
@@ -107,12 +113,13 @@ const RegisterPage = () => {
             window.location.href = "/"
         }
     }, []);
+
     const ForgetPwdComponent4 = (
         <div id="forgetpwd">
 
             <div className='step4 py-auto'>
                 <h3>密碼已變更！請重新登入</h3>
-                <div className='txt'>跳轉至首頁(3)</div>
+                <div className='txt'>3秒後將跳轉至首頁</div>
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 /* Import React Hooks */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /* Import Bootstrap Modules */
 import { Row, Col, Form, Button, ButtonGroup } from "react-bootstrap";
@@ -11,9 +11,11 @@ import back from '../../Assets/images/back.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
 
-const ForgetPwdStep2 = ({showNextStepComponent}) => {
+const ForgetPwdStep2 = ({ showNextStepComponent }) => {
     const [email, setEmail] = useState(null);
     const [fieldErrorList, setFieldErrorList] = useState([]);
+    const [content, setContent] = useState("");
+    const [second, setSecond] = useState(60);
 
     const handleLogInClick = event => {
         window.location.href = "/"
@@ -26,6 +28,24 @@ const ForgetPwdStep2 = ({showNextStepComponent}) => {
     const handleIsInvalid = field => {
         return fieldErrorList.indexOf(field) !== -1
     }
+    const reset = () => {
+        if (second === 0) {
+            setSecond(60)
+        }
+    }
+
+    useEffect(() => {
+        if (second > 0) {
+            setTimeout(() => {
+                setSecond(second - 1)
+            }, 1000);
+            setContent(`沒有收到驗證碼？(` + second + `)`)
+        } else {
+            console.log(0)
+            setContent(`重新發送?`)
+        }
+    }, [second]);
+
 
 
     const view = (
@@ -65,7 +85,7 @@ const ForgetPwdStep2 = ({showNextStepComponent}) => {
                             Please Enter Your E-mail
                         </Form.Control.Feedback>
                     </Form.Group>
-                    <div className='mt-2 code_text' >沒有收到驗證碼？(60)</div>
+                    <div className='mt-2 code_text' onClick={reset}>{content}</div>
 
                     <ButtonGroup className="w-100 mt-3">
                         <Button type="button" className="me-1" onClick={showNextStepComponent}> 下一步 <span></span></Button>

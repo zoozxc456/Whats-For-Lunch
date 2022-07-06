@@ -1,6 +1,6 @@
 
 /* Import React Hooks */
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 /* Import Bootstrap Modules */
 import { Row, Col, Form, Button, ButtonGroup } from "react-bootstrap";
@@ -12,19 +12,58 @@ import back from '../../Assets/images/back.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
 
-const ForgetPwdStep3 = ({showNextStepComponent}) => {
-    const [password, setPassword] = useState("");
+const ForgetPwdStep3 = ({ showNextStepComponent }) => {
+    // const [password, setPassword] = useState("");
+    const password = useRef();
+    const [isInvalidPassword, setisInvalidPassword] = useState(false);
+    const [formFeedbackText, setFormFeedbackText] = useState("");
+    const confirmPwd = useRef();
+    const [isInvalidConfirmPwd, setisInvalidConfirmPwd] = useState(false);
+    const [formFeedbackText2, setFormFeedbackText2] = useState("");
     const [fieldErrorList, setFieldErrorList] = useState([]);
     const handleLogInClick = event => {
         window.location.href = "/"
     }
 
-    const handlePasswordChangeEvent = event => {
-        const password_Value = event.target.value;
-        setPassword(password_Value);
-    }
+    // const handlePasswordChangeEvent = event => {
+    //     const password_Value = event.target.value;
+    //     setPassword(password_Value);
+    // }
     const handleIsInvalid = field => {
         return fieldErrorList.indexOf(field) !== -1
+    }
+    const checkPassword = () => {
+
+        const passwordValue = password.current.value
+        if (passwordValue === "") {
+            setisInvalidPassword(true)
+            setFormFeedbackText("請輸入新密碼")
+        } else {
+            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+            if (!passwordValue.match(passwordRegex)) {
+                setisInvalidPassword(true)
+                setFormFeedbackText("新密碼格式錯誤")
+            }else{
+                setisInvalidPassword(false)
+            }
+        }
+
+        const confirmPwdValue = confirmPwd.current.value
+        if (confirmPwdValue === "") {
+            setisInvalidConfirmPwd(true)
+            setFormFeedbackText2("請再次輸入新密碼")
+        } else {
+            if (confirmPwdValue === passwordValue) {
+                setisInvalidConfirmPwd(false)
+                showNextStepComponent()
+            } else {
+                setisInvalidConfirmPwd(true)
+                setFormFeedbackText2("新密碼輸入錯誤")
+            }
+
+        }
+
+
     }
 
     const view = (
@@ -53,11 +92,12 @@ const ForgetPwdStep3 = ({showNextStepComponent}) => {
                             type="password"
                             required
                             placeholder="6+ Characters, 1 Capital letter"
-                            onChange={handlePasswordChangeEvent}
-                            isInvalid={handleIsInvalid("Password")}
+                            ref={password}
+                            // onChange={handlePasswordChangeEvent}
+                            isInvalid={isInvalidPassword}
                         />
                         <Form.Control.Feedback type="invalid">
-                            Please Enter Your Password
+                            {formFeedbackText}
                         </Form.Control.Feedback>
                     </Form.Group>
 
@@ -67,16 +107,17 @@ const ForgetPwdStep3 = ({showNextStepComponent}) => {
                             type="password"
                             required
                             placeholder="6+ Characters, 1 Capital letter"
-                            onChange={handlePasswordChangeEvent}
-                            isInvalid={handleIsInvalid("Password")}
+                            ref={confirmPwd}
+                            // onChange={handlePasswordChangeEvent}
+                            isInvalid={isInvalidConfirmPwd}
                         />
                         <Form.Control.Feedback type="invalid">
-                            Please Enter Your Password
+                            {formFeedbackText2}
                         </Form.Control.Feedback>
                     </Form.Group>
 
                     <ButtonGroup className="w-100 mt-3">
-                        <Button type="button" className="me-1" onClick={showNextStepComponent}> 下一步 <span></span></Button>
+                        <Button type="button" className="me-1" onClick={checkPassword}> 下一步 <span></span></Button>
                     </ButtonGroup>
 
                 </Form>

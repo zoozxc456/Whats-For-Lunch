@@ -11,8 +11,10 @@ import back from '../../Assets/images/back.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
 
-const ForgetPwdStep1 = ({showNextStepComponent}) => {
+const ForgetPwdStep1 = ({ showNextStepComponent }) => {
     const email = useRef("");
+    const [isInvalidEmail,setIsInvalidEmail] = useState(false);
+    const [formFeedbackText,setFormFeedbackText]=useState("")
     const [fieldErrorList, setFieldErrorList] = useState([]);
     const handleLogInClick = event => {
         window.location.href = "/"
@@ -20,6 +22,25 @@ const ForgetPwdStep1 = ({showNextStepComponent}) => {
 
     const handleIsInvalid = field => {
         return fieldErrorList.indexOf(field) !== -1
+    }
+
+    const checkEmail = () => {
+        const emailValue = email.current.value;
+        if (emailValue === "") {
+            setFormFeedbackText("請輸入E-mail")
+            setIsInvalidEmail(true)
+        }else{
+            const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+            const result = emailValue.match(emailRegex)??false;
+            if(!result){
+                setFormFeedbackText("請輸入正確的E-mail")
+                setIsInvalidEmail(true)
+            }
+            else{
+                setIsInvalidEmail(false)
+                showNextStepComponent()
+            }
+        }
     }
 
     const view = (
@@ -54,15 +75,15 @@ const ForgetPwdStep1 = ({showNextStepComponent}) => {
                             required
                             placeholder="name@mail.com"
                             ref={email}
-                            isInvalid={handleIsInvalid("Email")}
+                            isInvalid={isInvalidEmail}
                         />
                         <Form.Control.Feedback type="invalid">
-                            Please Enter Your E-mail
+                            {formFeedbackText}
                         </Form.Control.Feedback>
                     </Form.Group>
 
                     <ButtonGroup className="w-100 mt-3">
-                        <Button type="button" className="me-1" onClick={showNextStepComponent}> 下一步 <span></span></Button>
+                        <Button type="button" className="me-1" onClick={checkEmail}> 下一步 <span></span></Button>
                     </ButtonGroup>
                 </Form>
             </Row>

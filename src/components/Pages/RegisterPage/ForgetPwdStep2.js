@@ -1,5 +1,5 @@
 /* Import React Hooks */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /* Import Bootstrap Modules */
 import { Row, Col, Form, Button, ButtonGroup } from "react-bootstrap";
@@ -12,7 +12,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
 
 const ForgetPwdStep2 = ({ showNextStepComponent }) => {
-    const [email, setEmail] = useState(null);
+    const correctVaildCode="12345"
+    const validCode = useRef("")
+    // const [validCode, setValidCode] = useState(null);
+    const [isValidCode, setIsValidCode] = useState(false);
+    const [formFeedbackText, setFormFeedbackText] = useState("")
     const [fieldErrorList, setFieldErrorList] = useState([]);
     const [content, setContent] = useState("");
     const [second, setSecond] = useState(60);
@@ -21,10 +25,27 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
         window.location.href = "/"
     }
 
-    const handleEmailChangeEvent = event => {
-        const email_Value = event.target.value;
-        setEmail(email_Value);
+    // const handleEmailChangeEvent = event => {
+    //     const email_Value = event.target.value;
+    //     setEmail(email_Value);
+    // }
+
+    const checkValidCode = () => {
+        const validCodeValue=validCode.current.value
+        if ( validCodeValue=== "") {
+            setIsValidCode(true)
+            setFormFeedbackText("請輸入驗證碼")
+        } else {
+            if (validCodeValue === correctVaildCode) {
+                setIsValidCode(false)
+                showNextStepComponent()
+            } else {
+                setIsValidCode(true)
+                setFormFeedbackText("請輸入正確的驗證碼")
+            }
+        }
     }
+
     const handleIsInvalid = field => {
         return fieldErrorList.indexOf(field) !== -1
     }
@@ -78,17 +99,17 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
                             type="email"
                             required
                             placeholder="輸入驗證碼"
-                            onChange={handleEmailChangeEvent}
-                            isInvalid={handleIsInvalid("Email")}
+                            ref={validCode}
+                            isInvalid={isValidCode}
                         />
                         <Form.Control.Feedback type="invalid">
-                            Please Enter Your E-mail
+                            {formFeedbackText}
                         </Form.Control.Feedback>
                     </Form.Group>
                     <div className='mt-2 code_text' onClick={reset}>{content}</div>
 
                     <ButtonGroup className="w-100 mt-3">
-                        <Button type="button" className="me-1" onClick={showNextStepComponent}> 下一步 <span></span></Button>
+                        <Button type="button" className="me-1" onClick={checkValidCode}> 下一步 <span></span></Button>
                     </ButtonGroup>
                 </Form>
             </Row>

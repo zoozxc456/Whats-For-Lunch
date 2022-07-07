@@ -30,6 +30,10 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
     //     setEmail(email_Value);
     // }
 
+    const formAction = (event) => {
+        event.preventDefault();
+        checkValidCode();
+    }
     const checkValidCode = () => {
         const validCodeValue=validCode.current.value
         if ( validCodeValue=== "") {
@@ -56,15 +60,17 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
     }
 
     useEffect(() => {
-        if (second > 0) {
-            setTimeout(() => {
+         const timer=setTimeout(() => {
                 setSecond(second - 1)
             }, 1000);
+        if (second > 0) {
+           
             setContent(`沒有收到驗證碼？(` + second + `)`)
         } else {
             console.log(0)
             setContent(`重新發送?`)
         }
+        return clearTimeout(timer)
     }, [second]);
 
 
@@ -89,14 +95,14 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
                 <Col xs={1} className='text-center p-1 mx-2'>3</Col>
             </Row>
             <Row className="m-0">
-                <Form id="ForgetPasswordForm" className="align-self-center mx-auto w-75">
+                <Form id="ForgetPasswordForm" className="align-self-center mx-auto w-75" onSubmit={formAction}>
                     <Form.Group as={Col} className={""}>
                         <div className="">
                             <Form.Label className="me-3">輸入驗證碼</Form.Label>
                         </div>
 
                         <Form.Control
-                            type="email"
+                            type="text"
                             required
                             placeholder="輸入驗證碼"
                             ref={validCode}

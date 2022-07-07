@@ -1,6 +1,6 @@
 /* Import React Hooks */
 import { useRef, useState } from "react";
-
+import { emailIsMeetRule } from "../../../utils/meetRule";
 /* Import Bootstrap Modules */
 import { Row, Col, Form, Button, ButtonGroup } from "react-bootstrap";
 
@@ -10,11 +10,12 @@ import back from '../../Assets/images/back.png';
 /* Import CSSs */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
+import axios from "axios";
 
 const ForgetPwdStep1 = ({ showNextStepComponent }) => {
     const email = useRef("");
-    const [isInvalidEmail,setIsInvalidEmail] = useState(false);
-    const [formFeedbackText,setFormFeedbackText]=useState("")
+    const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+    const [formFeedbackText, setFormFeedbackText] = useState("")
     const [fieldErrorList, setFieldErrorList] = useState([]);
     const handleLogInClick = event => {
         window.location.href = "/"
@@ -24,21 +25,32 @@ const ForgetPwdStep1 = ({ showNextStepComponent }) => {
         return fieldErrorList.indexOf(field) !== -1
     }
 
+    const formAction = (event) => {
+        event.preventDefault();
+        checkEmail();
+    }
+
     const checkEmail = () => {
         const emailValue = email.current.value;
         if (emailValue === "") {
             setFormFeedbackText("請輸入E-mail")
             setIsInvalidEmail(true)
-        }else{
-            const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-            const result = emailValue.match(emailRegex)??false;
-            if(!result){
+        } else {
+            if (emailIsMeetRule(emailValue)) {
+                axios.post("http://192.168.0.2:39820/user/email", { "email": emailValue })
+                    .then ((res) => {
+                        // console.log(res)
+                        setIsInvalidEmail(false)
+                        showNextStepComponent()
+                    }).catch((err)=>{
+                        console.log(err.response)
+                        setFormFeedbackText("請輸入正確的E-mail")
+                        setIsInvalidEmail(true)
+                    })
+            }
+            else {
                 setFormFeedbackText("請輸入正確的E-mail")
                 setIsInvalidEmail(true)
-            }
-            else{
-                setIsInvalidEmail(false)
-                showNextStepComponent()
             }
         }
     }
@@ -63,7 +75,7 @@ const ForgetPwdStep1 = ({ showNextStepComponent }) => {
                 <Col xs={1} className='text-center p-1 mx-2'>3</Col>
             </Row>
             <Row className="m-0">
-                <Form id="ForgetPasswordForm" className="align-self-center mx-auto w-75">
+                <Form id="ForgetPasswordForm" className="align-self-center mx-auto w-75" onSubmit={formAction}>
                     {/* E-mail Field */}
                     <Form.Group as={Col} className={""}>
                         <div className="">

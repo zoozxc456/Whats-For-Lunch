@@ -1,7 +1,7 @@
 
 /* Import React Hooks */
-import { useState, useRef } from "react";
-
+import { useState, useEffect, useRef } from "react";
+import { passwordIsMeetRule } from "../../../utils/meetRule";
 /* Import Bootstrap Modules */
 import { Row, Col, Form, Button, ButtonGroup } from "react-bootstrap";
 
@@ -29,9 +29,20 @@ const ForgetPwdStep3 = ({ showNextStepComponent }) => {
     //     const password_Value = event.target.value;
     //     setPassword(password_Value);
     // }
-    const handleIsInvalid = field => {
-        return fieldErrorList.indexOf(field) !== -1
-    }
+    useEffect(() => {
+        window.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkPassword();
+            } else {
+                console.log(event.key)
+            }
+        })
+    }, []);
+
+    // const handleIsInvalid = field => {
+    //     return fieldErrorList.indexOf(field) !== -1
+    // }
     const checkPassword = () => {
 
         const passwordValue = password.current.value
@@ -39,11 +50,10 @@ const ForgetPwdStep3 = ({ showNextStepComponent }) => {
             setisInvalidPassword(true)
             setFormFeedbackText("請輸入新密碼")
         } else {
-            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-            if (!passwordValue.match(passwordRegex)) {
+            if (passwordIsMeetRule(passwordValue)) {
                 setisInvalidPassword(true)
                 setFormFeedbackText("新密碼格式錯誤")
-            }else{
+            } else {
                 setisInvalidPassword(false)
             }
         }

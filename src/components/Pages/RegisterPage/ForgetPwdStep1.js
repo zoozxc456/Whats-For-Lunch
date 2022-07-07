@@ -16,13 +16,8 @@ const ForgetPwdStep1 = ({ showNextStepComponent }) => {
     const email = useRef("");
     const [isInvalidEmail, setIsInvalidEmail] = useState(false);
     const [formFeedbackText, setFormFeedbackText] = useState("")
-    const [fieldErrorList, setFieldErrorList] = useState([]);
     const handleLogInClick = event => {
         window.location.href = "/"
-    }
-
-    const handleIsInvalid = field => {
-        return fieldErrorList.indexOf(field) !== -1
     }
 
     const formAction = (event) => {

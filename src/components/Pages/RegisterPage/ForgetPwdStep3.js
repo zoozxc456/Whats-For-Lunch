@@ -13,22 +13,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
 
 const ForgetPwdStep3 = ({ showNextStepComponent }) => {
-    // const [password, setPassword] = useState("");
     const password = useRef();
     const [isInvalidPassword, setisInvalidPassword] = useState(false);
     const [formFeedbackText, setFormFeedbackText] = useState("");
     const confirmPwd = useRef();
     const [isInvalidConfirmPwd, setisInvalidConfirmPwd] = useState(false);
     const [formFeedbackText2, setFormFeedbackText2] = useState("");
-    const [fieldErrorList, setFieldErrorList] = useState([]);
+
     const handleLogInClick = event => {
         window.location.href = "/"
     }
 
-    // const handlePasswordChangeEvent = event => {
-    //     const password_Value = event.target.value;
-    //     setPassword(password_Value);
-    // }
     useEffect(() => {
         window.addEventListener("keypress", (event) => {
             if (event.key === "Enter") {
@@ -38,11 +33,8 @@ const ForgetPwdStep3 = ({ showNextStepComponent }) => {
                 console.log(event.key)
             }
         })
-    }, []);
+    });
 
-    // const handleIsInvalid = field => {
-    //     return fieldErrorList.indexOf(field) !== -1
-    // }
     const checkPassword = () => {
 
         const passwordValue = password.current.value
@@ -103,7 +95,6 @@ const ForgetPwdStep3 = ({ showNextStepComponent }) => {
                             required
                             placeholder="6+ Characters, 1 Capital letter"
                             ref={password}
-                            // onChange={handlePasswordChangeEvent}
                             isInvalid={isInvalidPassword}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -118,7 +109,6 @@ const ForgetPwdStep3 = ({ showNextStepComponent }) => {
                             required
                             placeholder="6+ Characters, 1 Capital letter"
                             ref={confirmPwd}
-                            // onChange={handlePasswordChangeEvent}
                             isInvalid={isInvalidConfirmPwd}
                         />
                         <Form.Control.Feedback type="invalid">

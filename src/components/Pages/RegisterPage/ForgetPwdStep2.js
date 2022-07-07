@@ -12,12 +12,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
 
 const ForgetPwdStep2 = ({ showNextStepComponent }) => {
-    const correctVaildCode="12345"
-    const validCode = useRef("")
-    // const [validCode, setValidCode] = useState(null);
+    const correctVaildCode = "12345";
+    const validCode = useRef("");
     const [isValidCode, setIsValidCode] = useState(false);
-    const [formFeedbackText, setFormFeedbackText] = useState("")
-    const [fieldErrorList, setFieldErrorList] = useState([]);
+    const [formFeedbackText, setFormFeedbackText] = useState("");
     const [content, setContent] = useState("");
     const [second, setSecond] = useState(60);
 
@@ -25,18 +23,13 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
         window.location.href = "/"
     }
 
-    // const handleEmailChangeEvent = event => {
-    //     const email_Value = event.target.value;
-    //     setEmail(email_Value);
-    // }
-
     const formAction = (event) => {
         event.preventDefault();
         checkValidCode();
     }
     const checkValidCode = () => {
-        const validCodeValue=validCode.current.value
-        if ( validCodeValue=== "") {
+        const validCodeValue = validCode.current.value
+        if (validCodeValue === "") {
             setIsValidCode(true)
             setFormFeedbackText("請輸入驗證碼")
         } else {
@@ -50,9 +43,6 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
         }
     }
 
-    const handleIsInvalid = field => {
-        return fieldErrorList.indexOf(field) !== -1
-    }
     const reset = () => {
         if (second === 0) {
             setSecond(60)
@@ -60,11 +50,11 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
     }
 
     useEffect(() => {
-         const timer=setTimeout(() => {
-                setSecond(second - 1)
-            }, 1000);
+        const timer = setTimeout(() => {
+            setSecond(second - 1)
+        }, 1000);
         if (second > 0) {
-           
+
             setContent(`沒有收到驗證碼？(` + second + `)`)
         } else {
             console.log(0)

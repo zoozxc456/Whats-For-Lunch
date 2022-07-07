@@ -23,7 +23,7 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
         window.location.href = "/"
     }
 
-    const formAction = (event) => {
+    const handleFormSubmit = (event) => {
         event.preventDefault();
         checkValidCode();
     }
@@ -85,7 +85,7 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
                 <Col xs={1} className='text-center p-1 mx-2'>3</Col>
             </Row>
             <Row className="m-0">
-                <Form id="ForgetPasswordForm" className="align-self-center mx-auto w-75" onSubmit={formAction}>
+                <Form id="ForgetPasswordForm" className="align-self-center mx-auto w-75" onSubmit={handleFormSubmit}>
                     <Form.Group as={Col} className={""}>
                         <div className="">
                             <Form.Label className="me-3">輸入驗證碼</Form.Label>

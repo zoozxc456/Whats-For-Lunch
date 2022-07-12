@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
 import axios from "axios";
 
-const ForgetPwdStep1 = ({ showNextStepComponent }) => {
+const ForgetPwdStep1 = ({ showNextStepComponent,setUserEmail }) => {
     const email = useRef("");
     const [isInvalidEmail, setIsInvalidEmail] = useState(false);
     const [formFeedbackText, setFormFeedbackText] = useState("")
@@ -20,33 +20,46 @@ const ForgetPwdStep1 = ({ showNextStepComponent }) => {
         window.location.href = "/"
     }
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async(event) => {
         event.preventDefault();
         checkEmail();
     }
 
-    const checkEmail = () => {
+    const verifyEmailStatusHandlers = {
+        validEmail: () => {
+            setIsInvalidEmail(false);
+            setUserEmail(email.current.value)
+            showNextStepComponent();
+        },
+        invalidEmail: (errorMessage) => {
+            setFormFeedbackText(errorMessage);
+            setIsInvalidEmail(true);
+        }
+    }
+
+    const announceUpdatePasswordRequest = (emailValue) => {
+        const checkEmailPayload = { "email": emailValue };
+        const apiRootUrl = process.env.REACT_APP_API_ROOT;
+        console.log(apiRootUrl)
+        return axios.post(`${apiRootUrl}/user/forget/email`, checkEmailPayload)
+            .then((res) => {
+                return true;
+            }).catch((err) => {
+                return false;
+            })
+    }
+
+    const checkEmail = async () => {
         const emailValue = email.current.value;
-        if (emailValue === "") {
-            setFormFeedbackText("請輸入E-mail")
-            setIsInvalidEmail(true)
+        const { validEmail, invalidEmail } = verifyEmailStatusHandlers;
+
+        if (emailValue && emailIsMeetRule(emailValue)) {
+            const isAnnounceSuccess = await announceUpdatePasswordRequest(emailValue);
+            isAnnounceSuccess ? validEmail() : invalidEmail("請輸入正確的E-mail");
+        } else if (emailValue !== "") {
+            invalidEmail("請輸入正確的E-mail")
         } else {
-            if (emailIsMeetRule(emailValue)) {
-                axios.post("http://192.168.0.2:39820/user/email", { "email": emailValue })
-                    .then ((res) => {
-                        // console.log(res)
-                        setIsInvalidEmail(false)
-                        showNextStepComponent()
-                    }).catch((err)=>{
-                        console.log(err.response)
-                        setFormFeedbackText("請輸入正確的E-mail")
-                        setIsInvalidEmail(true)
-                    })
-            }
-            else {
-                setFormFeedbackText("請輸入正確的E-mail")
-                setIsInvalidEmail(true)
-            }
+            invalidEmail("請輸入E-mail")
         }
     }
 

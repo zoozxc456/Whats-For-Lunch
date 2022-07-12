@@ -11,8 +11,9 @@ import back from '../../Assets/images/back.png';
 /* Import CSSs */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
+import axios from "axios";
 
-const ForgetPwdStep3 = ({ showNextStepComponent }) => {
+const ForgetPwdStep3 = ({ showNextStepComponent, getUserEmail }) => {
     const password = useRef();
     const [isInvalidPassword, setisInvalidPassword] = useState(false);
     const [formFeedbackText, setFormFeedbackText] = useState("");
@@ -34,7 +35,16 @@ const ForgetPwdStep3 = ({ showNextStepComponent }) => {
             }
         })
     });
-
+    const updatePassword = () => {
+        const userEmail = getUserEmail()
+        console.log(userEmail)
+        axios.patch(`${process.env.REACT_APP_API_ROOT}/user/password`, { "email": userEmail, "password": password.current.value })
+            .then(res => {
+                console.log("ok")
+            }).catch(err => {
+                console.log("error")
+            })
+    }
     const checkPassword = () => {
 
         const passwordValue = password.current.value
@@ -57,6 +67,7 @@ const ForgetPwdStep3 = ({ showNextStepComponent }) => {
         } else {
             if (confirmPwdValue === passwordValue) {
                 setisInvalidConfirmPwd(false)
+                updatePassword()
                 showNextStepComponent()
             } else {
                 setisInvalidConfirmPwd(true)

@@ -50,17 +50,31 @@ const ForgetPwdStep2 = ({ showNextStepComponent }) => {
     }
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setSecond(second - 1)
-        }, 1000);
-        if (second > 0) {
+        // const timer = setTimeout(() => {
+        //     setSecond(second - 1)
+        //     if (second > 0) {
+            
+        //         setContent(`沒有收到驗證碼？(` + second + `)`)
+        //     } else {
+        //         // console.log(0)
+        //         clearTimeout(timer)
+        //         setContent(`重新發送?`)
+        //     }
+        // }, 1000);
 
+        // return clearTimeout(timer)
+        let timer;
+        if(second>0){
             setContent(`沒有收到驗證碼？(` + second + `)`)
-        } else {
-            console.log(0)
+            timer = setTimeout(()=>{
+                setSecond(second-1);
+            },1000)
+            
+        }else{
             setContent(`重新發送?`)
+            clearTimeout(timer);
         }
-        return clearTimeout(timer)
+        return ()=> clearTimeout(timer)
     }, [second]);
 
 

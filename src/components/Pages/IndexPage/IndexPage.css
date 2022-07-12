@@ -194,11 +194,10 @@ body{
     border: 1px solid #AA9D87;
     color: #AA9D87;
 }
-
-.login_block Button:hover {
-    /* box-shadow: 3px 3px 0px #AA9D87 !important;  */
+.loginbtn{
+    background-color: #6C5E45 !important;
+    color: #fff !important;
 }
-
 .google_btn:hover {
     box-shadow: 3px 3px 0px #FFC940;
 }

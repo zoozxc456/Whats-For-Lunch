@@ -1,5 +1,5 @@
 /* Import React Hooks */
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 /* Import Bootstrap Modules */
 import { Row, Col, Form, Button, ButtonGroup } from "react-bootstrap";
@@ -11,75 +11,102 @@ import back from '../../Assets/images/back.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
 
+import { emailIsMeetRule, passwordIsMeetRule } from "../../../utils/meetRule";
+import axios from "axios";
 const Register = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
-    const [fieldErrorList, setFieldErrorList] = useState([]);
+    const email = useRef("");
+    const username = useRef("");
+    const password = useRef("");
+    const confirmPwd = useRef();
+    const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+    const [isInvalidUsername, setIsInvalidUsername] = useState(false);
+    const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+    const [isInvalidConfirmPwd, setIsInvalidConfirmPwd] = useState(false);
+    const [invalidEmailMessage, setInvalidEmailMessage] = useState("");
+    const [invalidUsernameMessage, setInvalidUsernameMessage] = useState("");
+    const [invalidPasswordMessage, setInvalidPasswordMessage] = useState("");
+    const [invalidConfirmPwdMessage, setInvalidConfirmPwdMessage] = useState("");
 
     const handleLogInClick = event => {
         window.location.href = "/"
     }
-    const handleEmailChangeEvent = event => {
-        const email_Value = event.target.value;
-        setEmail(email_Value);
-    }
-
-    const handlePasswordChangeEvent = event => {
-        const password_Value = event.target.value;
-        setPassword(password_Value);
-    }
-
-    const handleUsernameChangeEvent = event => {
-        const username_Value = event.target.value;
-        setUsername(username_Value);
-    }
-
-    const handleIsInvalid = field => {
-        return fieldErrorList.indexOf(field) !== -1
-    }
-
-    const handleSignUpClick = event => {
-
-        if (checkSignUpFormData()) {
-            // Coonect Sign Up API
+    const checkEmail = () => {
+        if (email.current.value === "") {
+            setInvalidEmailMessage("請輸入Email")
+            setIsInvalidEmail(true)
+            return false
+        } else if (!emailIsMeetRule(email.current.value)) {
+            setInvalidEmailMessage("Email格式錯誤")
+            setIsInvalidEmail(true)
+            return false
+        } else {
+            setIsInvalidEmail(false)
+            // console.log(email.current.value)
+            return true
         }
     }
-
-    const checkSignUpFormData = () => {
-        const localFieldErrorList = [];
-
-        // Check Email
-        if (!emailIsMeetRule()) {
-            localFieldErrorList.push("Email");
+    const checkUsername = () => {
+        if (username.current.value === "") {
+            setInvalidUsernameMessage("請輸入使用者名稱")
+            setIsInvalidUsername(true)
+            return false
+        } else {
+            setIsInvalidUsername(false)
+            return true
         }
-
-        // Check Password
-        if (!passwordIsMeetRule()) {
-            localFieldErrorList.push("Password");
+    }
+    const checkPassword = () => {
+        if (password.current.value === "") {
+            setInvalidPasswordMessage("請輸入密碼")
+            setIsInvalidPassword(true)
+            return false
+        } else if (!passwordIsMeetRule(password.current.value)) {
+            setInvalidPasswordMessage("密碼格式錯誤")
+            setIsInvalidPassword(true)
+            return false
+        } else {
+            setIsInvalidPassword(false)
+            return true
         }
-
-        // Check Username
-        if (!usernameIsMeetRule()) {
-            localFieldErrorList.push("Username");
+    }
+    const checkConfirmPwd = () => {
+        if (password.current.value === "") {
+            setInvalidConfirmPwdMessage("請輸入確認密碼")
+            setIsInvalidConfirmPwd(true)
+            return false
+        } else if (password.current.value !== confirmPwd.current.value) {
+            setInvalidConfirmPwdMessage("密碼輸入錯誤")
+            setIsInvalidConfirmPwd(true)
+            return false
+        } else {
+            setIsInvalidConfirmPwd(false)
+            return true
         }
-
-        setFieldErrorList(localFieldErrorList)
-        return localFieldErrorList.length <= 0;
     }
-
-    const emailIsMeetRule = () => {
-        const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-        return email.match(emailRegex) ?? false;
-    }
-
-    const passwordIsMeetRule = () => {
-        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-        return password.match(passwordRegex) ?? false;
-    }
-
-    const usernameIsMeetRule = () => {
-        return username.length > 0;
+    const checkSignup = () => {
+        const checkEmailResult = checkEmail();
+        const checkUsernameResult = checkUsername();
+        const checkPasswordResult = checkPassword();
+        const checkConfirmPwdResult = checkConfirmPwd();
+        if (checkEmailResult && checkUsernameResult && checkPasswordResult && checkConfirmPwdResult) {
+            // Register API
+            const apiRootUrl = process.env.REACT_APP_API_ROOT;
+            const originalSignupPayload = {
+                "email": email.current.value,
+                "password": password.current.value,
+                "username": username.current.value
+            };
+            axios.post(`${apiRootUrl}/user/register`, originalSignupPayload)
+                .then((res) => {
+                    alert("註冊成功")
+                    window.location.href = "/"
+                }).catch((err) => {
+                    alert("註冊失敗")
+                    // console.log(err)
+                })
+        } else {
+            console.log("error")
+        }
     }
 
     const view = (
@@ -109,11 +136,11 @@ const Register = () => {
                             type="email"
                             required
                             placeholder="name@mail.com"
-                            onChange={handleEmailChangeEvent}
-                            isInvalid={handleIsInvalid("Email")}
+                            ref={email}
+                            isInvalid={isInvalidEmail}
                         />
                         <Form.Control.Feedback type="invalid">
-                            Please Enter Your E-mail
+                            {invalidEmailMessage}
                         </Form.Control.Feedback>
                     </Form.Group>
 
@@ -123,12 +150,12 @@ const Register = () => {
                         <Form.Control
                             type="text"
                             required
-                            placeholder="Fill in your username"
-                            onChange={handleUsernameChangeEvent}
-                            isInvalid={handleIsInvalid("Username")}
+                            placeholder="請輸入使用者名稱"
+                            ref={username}
+                            isInvalid={isInvalidUsername}
                         />
                         <Form.Control.Feedback type="invalid">
-                            Please Enter Your Username
+                            {invalidUsernameMessage}
                         </Form.Control.Feedback>
                     </Form.Group>
 
@@ -138,12 +165,12 @@ const Register = () => {
                         <Form.Control
                             type="password"
                             required
-                            placeholder="6+ Characters, 1 Capital letter"
-                            onChange={handlePasswordChangeEvent}
-                            isInvalid={handleIsInvalid("Password")}
+                            placeholder="須包含一個大寫字母、一個小寫字母，６～２０個字"
+                            ref={password}
+                            isInvalid={isInvalidPassword}
                         />
                         <Form.Control.Feedback type="invalid">
-                            Please Enter Your Password
+                            {invalidPasswordMessage}
                         </Form.Control.Feedback>
                     </Form.Group>
 
@@ -153,17 +180,17 @@ const Register = () => {
                         <Form.Control
                             type="password"
                             required
-                            placeholder="6+ Characters, 1 Capital letter"
-                            onChange={handlePasswordChangeEvent}
-                            isInvalid={handleIsInvalid("Password")}
+                            placeholder="須包含一個大寫字母、一個小寫字母，６～２０個字"
+                            ref={confirmPwd}
+                            isInvalid={isInvalidConfirmPwd}
                         />
                         <Form.Control.Feedback type="invalid">
-                            Please Enter Your Password
+                            {invalidConfirmPwdMessage}
                         </Form.Control.Feedback>
                     </Form.Group>
 
                     <ButtonGroup className="w-100 mt-3">
-                        <Button type="button" className="me-1" onClick={handleSignUpClick}> 註冊 <span></span></Button>
+                        <Button type="button" className="me-1" onClick={checkSignup}> 註冊 <span></span></Button>
                     </ButtonGroup>
                 </Form>
             </Row>

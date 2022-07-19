@@ -23,11 +23,11 @@ function App() {
           </AuthRoute>
 
           {/* Below Routes For MemberUser */}
-          <AuthRoute path="/Order" Permission="member">
+          <AuthRoute path="/Order" Permission="user">
             <OrderPage />
           </AuthRoute>
 
-          <AuthRoute path="/Home" Permission="member">
+          <AuthRoute path="/Home" Permission="user">
             <HomePage />
           </AuthRoute>
 
@@ -43,8 +43,6 @@ function App() {
           <AuthRoute path="/" type="Index" Permission="guest">
             <IndexPage />
           </AuthRoute>
-
-          
 
         </Switch>
       </Router>

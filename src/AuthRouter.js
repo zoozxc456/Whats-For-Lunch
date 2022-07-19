@@ -3,36 +3,35 @@ import { tokenDecoder } from "./utils/tokenDecoder";
 
 const setUserRole = (token) => {
     try {
-        return tokenDecoder(token).Role;
+        return tokenDecoder(token).role;
     } catch (e) {
         return 'guest';
     }
 }
 
-const IsAdminUser = (Role) => Role === 'admin';
-const IsGuestUser = (Role) => Role === 'guest';
-const IsMemberUser = (Role) => Role === 'member';
+const IsAdminUser = (role) => role === 'admin';
+const IsGuestUser = (role) => role === 'guest';
+const IsMemberUser = (role) => role === 'user';
 
-const IsPermissonToAccess = (Role, Permission) => Role === Permission;
+const IsPermissonToAccess = (role, Permission) => role === Permission;
 
 
 const AuthRoute = (RouteProps) => {
 
     const { Permission, type, ...props } = RouteProps;
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
 
-    const Role = setUserRole(token) ?? 'guest';
+    const role = setUserRole(token) ?? 'guest';
 
-    console.log(RouteProps,token,Role);
-    if (IsGuestUser(Role) && !IsPermissonToAccess(Role, Permission)) {
-        // return <Redirect to="/" />
+    if (IsGuestUser(role) && !IsPermissonToAccess(role, Permission)) {
+         return <Redirect to="/" />
     }
 
-    if (IsMemberUser(Role) && !IsPermissonToAccess(Role, Permission)) {
+    if (IsMemberUser(role) && !IsPermissonToAccess(role, Permission)) {
         return <Redirect to="/Home" />;
     }
 
-    if (IsAdminUser(Role) && !IsPermissonToAccess(Role, Permission)) {
+    if (IsAdminUser(role) && !IsPermissonToAccess(role, Permission)) {
         return <Redirect to="/Administrator" />;
     }
 

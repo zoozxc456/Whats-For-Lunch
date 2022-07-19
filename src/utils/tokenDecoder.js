@@ -2,10 +2,10 @@ import jwtDecode from "jwt-decode";
 
 const tokenDecoder = token => {
     try {
-        const decoded = jwtDecode(token);
-        return decoded.payload;
+        const decodedPayload = jwtDecode(token);
+        return decodedPayload;
     }catch(e){
-        console.log('token error');
+        return null;
     }
 }
 

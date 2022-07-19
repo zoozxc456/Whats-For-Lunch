@@ -53,30 +53,26 @@ const ForgetPwdStep3 = ({ showNextStepComponent, getUserEmail }) => {
             setFormFeedbackText("請輸入新密碼")
         } else {
             if (passwordIsMeetRule(passwordValue)) {
+                setisInvalidPassword(false)
+                const confirmPwdValue = confirmPwd.current.value
+                if (confirmPwdValue === "") {
+                    setisInvalidConfirmPwd(true)
+                    setFormFeedbackText2("請再次輸入新密碼")
+                } else {
+                    if (confirmPwdValue === passwordValue) {
+                        setisInvalidConfirmPwd(false)
+                        updatePassword()
+                        showNextStepComponent()
+                    } else {
+                        setisInvalidConfirmPwd(true)
+                        setFormFeedbackText2("新密碼輸入錯誤")
+                    }
+                }
+            } else {
                 setisInvalidPassword(true)
                 setFormFeedbackText("新密碼格式錯誤")
-            } else {
-                setisInvalidPassword(false)
             }
         }
-
-        const confirmPwdValue = confirmPwd.current.value
-        if (confirmPwdValue === "") {
-            setisInvalidConfirmPwd(true)
-            setFormFeedbackText2("請再次輸入新密碼")
-        } else {
-            if (confirmPwdValue === passwordValue) {
-                setisInvalidConfirmPwd(false)
-                updatePassword()
-                showNextStepComponent()
-            } else {
-                setisInvalidConfirmPwd(true)
-                setFormFeedbackText2("新密碼輸入錯誤")
-            }
-
-        }
-
-
     }
 
     const view = (
@@ -104,7 +100,7 @@ const ForgetPwdStep3 = ({ showNextStepComponent, getUserEmail }) => {
                         <Form.Control
                             type="password"
                             required
-                            placeholder="6+ Characters, 1 Capital letter"
+                            placeholder="須包含一個大寫字母、一個小寫字母，６～２０個字"
                             ref={password}
                             isInvalid={isInvalidPassword}
                         />
@@ -118,7 +114,7 @@ const ForgetPwdStep3 = ({ showNextStepComponent, getUserEmail }) => {
                         <Form.Control
                             type="password"
                             required
-                            placeholder="6+ Characters, 1 Capital letter"
+                            placeholder="須包含一個大寫字母、一個小寫字母，６～２０個字"
                             ref={confirmPwd}
                             isInvalid={isInvalidConfirmPwd}
                         />

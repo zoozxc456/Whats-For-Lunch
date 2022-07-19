@@ -198,6 +198,14 @@ body{
     background-color: #6C5E45 !important;
     color: #fff !important;
 }
+.btn_disabled{
+    opacity: 0.6;
+    cursor: default !important;
+}
+.btn_disabled_off{
+    opacity: 1;
+    cursor: auto;
+}
 .google_btn:hover {
     box-shadow: 3px 3px 0px #FFC940;
 }

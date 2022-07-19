@@ -7,46 +7,65 @@ import './IndexPage.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { Col, Row, Button } from "react-bootstrap";
 import axios from 'axios';
-
+import { emailIsMeetRule, passwordIsMeetRule } from "../../../utils/meetRule"
 
 const IndexPageComponent = () => {
-    // const [payload, setPayload] = useState(null);
-    // const [idToken, setIdToken] = useState(null);
     const [content, setContent] = useState(null);
-    // const email = useRef("");
-    // const password = useRef("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [disabled, setDisabled] = useState(false);
-    const [isInvalidClick, setIsInvalidClick] = useState("disabled");
+    const email = useRef("");
+    const password = useRef("");
+    // const [buttonDisabled, setButtonDisabled] = useState("");
     const [isInvalidEmail, setIsInvalidEmail] = useState(false);
     const [isInvalidPassword, setIsInvalidPassword] = useState(false);
-    // const emailValue = email.current.value;
-    // const passwordValue = password.current.value;
-    useEffect(() => {
-        // console.log(emailValue, passwordValue)
-        // if (emailValue !== undefined && passwordValue !== undefined) {
-        //     console.log("should remove disabled")
-        //     setIsInvalidClick("false")
-        // }
-        console.log(email, password)
-        if (email.length <= 0 || password.length <= 0) {
-            // document.querySelector(".loginbtn").setAttribute("disabled",true)
-            setDisabled(true)
 
+    const verifyLoginData = () => {
+        if (!emailIsMeetRule(email.current.value)) {
+            setIsInvalidEmail(true);
+            alert("Email格式錯誤")
+            return false;
+        } else if (!passwordIsMeetRule(password.current.value)) {
+            setIsInvalidPassword(true);
+            alert("密碼格式錯誤")
+            return false;
         } else {
-            console.log(123)
-            // document.querySelector(".loginbtn").removeAttribute("disabled")
-            setDisabled(false)
+            setIsInvalidEmail(false);
+            setIsInvalidPassword(false);
+            return true;
         }
-
-    }, [email, password, disabled]);
-
-    const checkLogin = () => {
-
-
     }
 
+    const checkLogin = () => {
+        if (email.current.value === "" && password.current.value === "") {
+            setIsInvalidEmail(true);
+            setIsInvalidPassword(true);
+            alert("請輸入帳號密碼")
+        } else if (email.current.value === "") {
+            setIsInvalidEmail(true);
+            alert("請輸入帳號")
+        } else if (password.current.value === "") {
+            setIsInvalidPassword(true);
+            alert("請輸入密碼")
+        } else {
+            const isValidLoginData = verifyLoginData();
+            if (isValidLoginData) {
+                // Login API
+                const apiRootUrl = process.env.REACT_APP_API_ROOT;
+                const originalLoginPayload = {
+                    "loginType": "original",
+                    "email": email.current.value,
+                    "password": password.current.value
+                };
+                axios.post(`${apiRootUrl}/user/login`, originalLoginPayload)
+                    .then((res) => {
+                        const { accessToken } = res.data.payload
+                        localStorage.setItem('accessToken', accessToken);
+                        window.location.href = "/home"
+                    }).catch((err) => {
+                        alert("帳號或密碼錯誤")
+                    })
+            }
+        }
+
+    }
     const removeContent = () => {
         setContent('')
     }
@@ -56,7 +75,6 @@ const IndexPageComponent = () => {
     const showLogin = () => {
         setContent(LoginComponent)
     }
-
     const handleRegister = (event) => {
         window.location.href = "/register?content=register"
     }
@@ -68,13 +86,12 @@ const IndexPageComponent = () => {
             <div className='login mt-5'>
                 <b>登入</b>
                 <span>Login</span>
-
             </div>
             <div className='my-1'>
-                <input className='py-1 ps-2' placeholder='電子郵件帳號' onChange={(event) => setEmail(event.target.value)} ></input>
+                <input className='py-1 ps-2' placeholder='電子郵件帳號' ref={email}></input>
             </div>
             <div className='my-1'>
-                <input className='py-1 ps-2' placeholder='密碼' type={"password"} onChange={(event) => setPassword(event.target.value)}></input>
+                <input className='py-1 ps-2' placeholder='密碼' type={"password"} ref={password} ></input>
             </div>
             <div className='function_txt fs-6 my-2'>
                 <span onClick={handleRegister}>註冊</span> | <span onClick={handleForgetPassword}>忘記密碼？</span>
@@ -84,10 +101,7 @@ const IndexPageComponent = () => {
             <div className='mb-5'>
                 <div className="mb-2 mt-3">
                     <div className="my-1">
-                        <button className="loginbtn" disabled ={disabled?true:""}>登入1</button>
-                        {/* <Button className="loginbtn fs-6" onClick={checkLogin}>
-                            登入
-                        </Button> */}
+                        <Button className={`loginbtn fs-6`} onClick={checkLogin}>登入</Button>
                     </div>
                     <div className="my-1">
                         <Button className="google_btn fs-6">
@@ -107,7 +121,7 @@ const IndexPageComponent = () => {
     );
 
     const AboutUsComponent = (
-        < Col className="about_block" >
+        <Col className="about_block">
             <div className='my-5'>
                 <span style={{ 'color': '#FFC940' }}>What's for Lunch?</span>
                 是專為團體訂餐
@@ -116,13 +130,12 @@ const IndexPageComponent = () => {
                 一起讓揪團訂餐變得更輕鬆吧！
                 <div className='byWHO mt-5'><span>By </span>開發團隊</div>
             </div>
-        </Col >
+        </Col>
     );
 
 
     return (
-
-        <div id="home" >
+        <div id="home">
             <div className="main mx-auto py-2">
                 <img src={pizza} className="pizza" alt="pizza" />
                 <img src={rice} className="rice" alt="rice" />
@@ -142,15 +155,12 @@ const IndexPageComponent = () => {
                 </Row>
                 <Row className={`middle_after mt-3 mb-4 mx-auto fs-5 px-sm-3 px-md-5 px-2 py-2 ${content ? '' : 'd-none'}`}>
                     {content}
-
                 </Row>
 
                 <Row className="bottom px-5">
                     <Col className="my-1"><Button className="about-btn fs-5" onClick={showAboutUs}>關於我們</Button></Col>
                     <Col className="my-1"><Button className="login-btn fs-5" onClick={showLogin}>登入</Button></Col>
                 </Row>
-
-
             </div>
             <div id="Copyright" className={`${content ? 'd-none' : ''}`}>
                 Copyright © 2022 All Rights Reserved.

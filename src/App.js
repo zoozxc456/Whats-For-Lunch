@@ -9,6 +9,7 @@ import LoginPage from "./components/Pages/LoginPage/LoginPage";
 import RegisterPage from "./components/Pages/RegisterPage/RegisterPage";
 import HomePage from "./components/Pages/HomePage/HomePage";
 import OrderPage from "./components/Pages/OrderPage/OrderPage";
+import Profile from "./components/Pages/ProfilePage/ProfilePage"
 import AdministratorPage from "./components/Pages/AdministratorPage/AdministratorPage";
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
           </AuthRoute>
 
           {/* Below Routes For MemberUser */}
+          <AuthRoute path="/Profile" Permission="user">
+            <Profile />
+          </AuthRoute>
           <AuthRoute path="/Order" Permission="user">
             <OrderPage />
           </AuthRoute>

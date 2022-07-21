@@ -1,4 +1,4 @@
-import logo2 from '../../Assets/images/logo2.png';
+import banner from '../../Assets/images/banner.png';
 
 import { Row, Col } from "react-bootstrap";
 import './Header.css';
@@ -11,7 +11,7 @@ const Header = (props) => {
         <div id="header" onClick={handleLogInClick} >
             <Row>
                 <Col>
-                    <img src={logo2} className={`logo2`} alt="logo" />
+                    <img src={banner} className={`logo2`} alt="logo" />
                 </Col>
             </Row>
         </div>

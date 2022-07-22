@@ -1,8 +1,10 @@
 import style from "./EditDialog.module.scss"
-import { useRef } from "react"
+import { useRef,useState } from "react"
 import { emailIsMeetRule } from "../../../../utils/meetRule";
 const EditEmailDialog = ({ closeDialogHandler, editNewEmailHandler }) => {
     const newEmail = useRef("");
+    const [closingStyle,setClosingStyle]=useState(false)
+    
     const checkNewEmailValue = () => {
         const emailValue = newEmail.current?.value ?? "";
         const isEmptyEmail = emailValue === "";
@@ -20,10 +22,17 @@ const EditEmailDialog = ({ closeDialogHandler, editNewEmailHandler }) => {
         }
     }
 
+    const handleCloseDialog=()=>{
+        setClosingStyle(true)
+        setTimeout(() => {
+            closeDialogHandler()
+        }, 800);
+    }
+
     return (
-        <div id={style.editDialog}>
+        <div id={style.editDialog} className={`${closingStyle?style.editDialog_closing:""}`}>
             <div className={style.container}>
-                <div className={style.dialog}>
+                <div className={`${style.dialog} ${closingStyle?style.dialog_closing:""}`}>
                     <div className={style.dialog_body}>
                         <div className={style.title}>修改電子郵件</div>
                         <input type={"email"} placeholder={"請輸入電子郵件"} ref={newEmail} />
@@ -33,7 +42,7 @@ const EditEmailDialog = ({ closeDialogHandler, editNewEmailHandler }) => {
                             <button onClick={checkNewEmailValue}>修改</button>
                         </div>
                         <div className={style.btn_container}>
-                            <button className={style.cancel_btn} onClick={closeDialogHandler}>取消</button>
+                            <button className={style.cancel_btn} onClick={handleCloseDialog}>取消</button>
                         </div>
                     </div>
                 </div>

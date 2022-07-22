@@ -63,6 +63,10 @@ $zh-tw-font: 'jf open 粉圓字型';
                         height: 100%;
                         position: absolute;
                     }
+                    &:hover {
+                        opacity: 0.8;
+                        transform: scale(0.9);
+                    }
                 }
             }
 
@@ -85,6 +89,10 @@ $zh-tw-font: 'jf open 粉圓字型';
                         position: absolute;
                         height: 100%;
                     }
+                    &:hover {
+                        opacity: 0.8;
+                        transform: scale(0.9);
+                    }
                 }
             }
 
@@ -106,15 +114,16 @@ $zh-tw-font: 'jf open 粉圓字型';
                     width: 175px;
                     padding: 3.5px 0;
                     color: #FFFFFF;
+                    font-weight: 500;
 
                     &:hover {
-                        // box-shadow: black 1px 2px 3px 0px;
-                        transform: scale(1.1);
-                    }
-
-                    &:active {
+                        opacity: 0.8;
                         transform: scale(0.9);
                     }
+
+                    // &:active {
+                    //     transform: scale(0.9);
+                    // }
                 }
             }
         }

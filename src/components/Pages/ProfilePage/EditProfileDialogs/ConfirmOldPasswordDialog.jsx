@@ -1,8 +1,9 @@
 import style from "./EditDialog.module.scss"
-import { useRef } from "react";
+import { useRef,useState } from "react";
 
 const ConfirmOldPasswordDialog = ({ confirmOldPasswordHandler, closeDialogHandler }) => {
     const oldPassword = useRef("");
+    const [closingStyle,setClosingStyle]=useState(false)
 
     const checkOldPasswordValue = () => {
         const oldPasswordValue = oldPassword.current?.value ?? "";
@@ -16,10 +17,17 @@ const ConfirmOldPasswordDialog = ({ confirmOldPasswordHandler, closeDialogHandle
         }
     }
 
+    const handleCloseDialog=()=>{
+        setClosingStyle(true)
+        setTimeout(() => {
+            closeDialogHandler()
+        }, 800);
+    }
+
     return (
-        <div id={style.editDialog}>
+        <div id={style.editDialog} className={`${closingStyle?style.editDialog_closing:""}`}>
             <div className={style.container}>
-                <div className={`${style.dialog}`}>
+                <div className={`${style.dialog} ${closingStyle?style.dialog_closing:""}`}>
                     <div className={style.dialog_body}>
                         <div className={style.title}>確認身份</div>
                         <input type={"password"} placeholder={"請輸入舊密碼"} ref={oldPassword} />
@@ -30,7 +38,7 @@ const ConfirmOldPasswordDialog = ({ confirmOldPasswordHandler, closeDialogHandle
                             <button onClick={checkOldPasswordValue}>確認</button>
                         </div>
                         <div className={style.btn_container}>
-                            <button className={style.cancel_btn} onClick={closeDialogHandler}>取消</button>
+                            <button className={style.cancel_btn} onClick={handleCloseDialog}>取消</button>
                         </div>
                     </div>
                 </div>

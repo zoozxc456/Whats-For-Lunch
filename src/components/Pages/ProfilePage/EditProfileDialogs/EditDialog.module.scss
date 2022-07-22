@@ -23,6 +23,15 @@ $zh-tw-font: 'jf open 粉圓字型';
         opacity: 0%;
     }
 }
+@keyframes fadeIn {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
 @keyframes fadeOut{
     0% {
         opacity: 100%;
@@ -42,6 +51,11 @@ $zh-tw-font: 'jf open 粉圓字型';
     z-index: 9999;
     background-color: #00000099;
 
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    animation-delay: 0s;
     * {
         font-family: $en-us-font, $zh-tw-font;
         transition: all 0.8s ease;

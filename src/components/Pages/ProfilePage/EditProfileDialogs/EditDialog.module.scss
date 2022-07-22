@@ -1,5 +1,18 @@
 $en-us-font: 'Hanna';
 $zh-tw-font: 'jf open 粉圓字型';
+
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 100%;
+    }
+}
+
 #editDialog {
     height: 100vh;
     width: 100vw;
@@ -8,9 +21,12 @@ $zh-tw-font: 'jf open 粉圓字型';
     left: 0;
     z-index: 9999;
     background-color: #00000099;
-    *{
-        font-family:  $en-us-font ,$zh-tw-font;
+
+    * {
+        font-family: $en-us-font, $zh-tw-font;
+        transition: all 0.8s ease;
     }
+
     .container {
         position: relative;
         height: 100%;
@@ -26,6 +42,14 @@ $zh-tw-font: 'jf open 粉圓字型';
             transform: translate(-50%, -50%);
             border: 1px solid #A89E89;
             border-radius: 40px;
+
+            * {
+                opacity: 0;
+                animation-name: fadeInUp;
+                animation-duration: .5s;
+                animation-fill-mode: forwards;
+                animation-delay: 0s;
+            }
 
             &.pwd_dialog {
                 .dialog_body {
@@ -78,7 +102,7 @@ $zh-tw-font: 'jf open 粉圓字型';
                     text-align: center;
                     color: #6C5E45;
                     font-size: 20px;
-                    font-family: $en-us-font ,$zh-tw-font;
+                    font-family: $en-us-font, $zh-tw-font;
                 }
             }
 
@@ -99,6 +123,7 @@ $zh-tw-font: 'jf open 粉圓字型';
                         color: #FFFFFF;
                         padding: 10px 50px;
                         font-size: 24px;
+
                         &.cancel_btn {
                             background-color: #FFFFFF;
                             color: #6C5E45;

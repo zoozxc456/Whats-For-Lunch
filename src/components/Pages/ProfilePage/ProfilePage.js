@@ -1,7 +1,8 @@
 import HomeLayout from "../UserLayouts/Home.layout";
 import write from "../../Assets/images/write.png"
 import style from "./ProfilePage.module.scss"
-import EditDialog from "./EditDialog";
+// import { EditEmailDialog } from "./EditDialog";
+import EditDialog from "./EditProfileDialogs/EditDialog";
 import { useState } from "react";
 const Profile = () => {
     const [isShowDialog, setIsShowDialog] = useState(false);
@@ -46,6 +47,10 @@ const Profile = () => {
            editType={editType}
            closeDialog={closeDialog}
         />
+        {/* <EditEmailDialog
+            isShowDialog={isShowDialog}
+            closeDialog={closeDialog}
+        /> */}
         <HomeLayout childComponent={view} />
     </>
 }

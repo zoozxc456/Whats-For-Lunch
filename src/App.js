@@ -5,7 +5,6 @@ import AuthRoute from "./AuthRouter";
 
 /* Import Components */
 import IndexPage from './components/Pages/IndexPage/IndexPage';
-import LoginPage from "./components/Pages/LoginPage/LoginPage";
 import RegisterPage from "./components/Pages/RegisterPage/RegisterPage";
 import HomePage from "./components/Pages/HomePage/HomePage";
 import OrderPage from "./components/Pages/OrderPage/OrderPage";
@@ -36,9 +35,6 @@ function App() {
           </AuthRoute>
 
           {/* Below Route For Guest */}
-          <AuthRoute path="/Login" Permission="guest">
-            <LoginPage />
-          </AuthRoute>
 
           <AuthRoute path="/Register" Permission="guest">
             <RegisterPage />

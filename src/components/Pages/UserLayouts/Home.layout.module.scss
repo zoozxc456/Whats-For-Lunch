@@ -1,4 +1,5 @@
 $header-height:100px;
+$mobile-header-height:80px;
 $en-us-font: 'Hanna',
 sans-serif;
 $zh-tw-font: 'jf open 粉圓字型';
@@ -10,8 +11,37 @@ $zh-tw-font: 'jf open 粉圓字型';
     src: url('../../Assets/fonts/jf-openhuninn-1.1.ttf');
 }
 
+@keyframes openNavBar {
+    0% {
+        transform: translateX(-100vw);
+        // opacity: 0%;
+    }
+
+    100% {
+        transform: translateX(0px);
+        // opacity: 100%;
+    }
+}
+
+@keyframes closeNavBar {
+    0% {
+        transform: translateX(0px);
+        // opacity: 0%;
+    }
+
+    100% {
+        transform: translateX(-100vw);
+        // opacity: 100%;
+    }
+}
+
+.row {
+    --bs-gutter-x: 0 !important;
+}
+
 * {
     // font-family: $zh-tw-font;
+    --bs-gutter-x: 0 !important;
     transition: all 0.8s ease;
 }
 
@@ -20,17 +50,19 @@ $zh-tw-font: 'jf open 粉圓字型';
     box-shadow: #000000 0px 0px 1px;
     height: $header-height;
     position: relative;
-    display: flex;
-    align-items: center;
 
-    .main_title {
-        height: 60%;
+    .mobile {
+        display: none;
+    }
+
+    .desktop {
         display: flex;
         align-items: center;
+        height: 100%;
 
         .icon {
-            margin: 0 10px 0 30px;
-            height: 100%;
+            margin: 0 10px 0 2%;
+            height: 50%;
 
             img {
                 height: 100%;
@@ -38,27 +70,30 @@ $zh-tw-font: 'jf open 粉圓字型';
         }
 
         .title {
-            font-size: 3vw;
+            font-size: 36px;
             font-family: $en-us-font;
             color: #6C5E45;
         }
-    }
 
-    .features {
-        height: 40%;
-        position: absolute;
-        right: 1%;
-        display: flex;
-        align-items: center;
+        .features {
+            height: 40%;
+            position: absolute;
+            right: 1%;
+            display: flex;
+            align-items: center;
 
-        .notify {
-            height: 100%;
-
-            img {
+            .notify {
+                display: flex;
                 height: 100%;
+
+                img {
+                    height: 100%;
+                }
             }
         }
     }
+
+
 }
 
 #content {
@@ -67,7 +102,7 @@ $zh-tw-font: 'jf open 粉圓字型';
     height: calc(100vh - $header-height);
 
     #navBar {
-        height: calc(100vh - $header-height);
+        height: 100%;
         background-color: #6C5E45;
         color: #FFFFFF;
         padding: 10px 0;
@@ -76,16 +111,23 @@ $zh-tw-font: 'jf open 粉圓字型';
 
         .menu {
             position: absolute;
-            left: 10%;
+            right: 0;
             top: 15%;
-            width: 100%;
+            width: 90%;
             z-index: 99;
 
+
             .menu_item {
-                padding: 10px 70px;
+                padding: 10px 0;
                 font-size: 24px;
                 font-weight: 700;
                 margin: 10px 0;
+
+                div {
+                    width: 50%;
+                    margin: auto;
+                    cursor: pointer;
+                }
 
                 &.active {
                     border-radius: 1000px;
@@ -97,36 +139,322 @@ $zh-tw-font: 'jf open 粉圓字型';
             }
         }
 
-        .images {
-            position: absolute;
+        .image {
             width: 100%;
-            height: 50%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            opacity: 0.16;
+
+            &.pizza {
+                position: absolute;
+                height: max-content;
+                width: 80%;
+                right: 0;
+                bottom: 20%;
+
+                img {
+                    transform: translate(45px, 0);
+                    width: 100%;
+                }
+            }
+
+            &.rice {
+                position: absolute;
+                height: max-content;
+                width: 75%;
+                bottom: 0;
+
+                img {
+                    transform: translate(-45px, 20px);
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    #sub_feature {
+        margin: 1rem 1rem;
+        display: flex;
+        color: #6C5E45;
+        font-family: $zh-tw-font;
+        font-size: 28px;
+        font-weight: 800;
+        position: relative;
+        flex: 1;
+        .item {
+            filter: opacity(0.6);
+            margin: 0 25px;
+            text-align: center;
+
+            &.active {
+                filter: opacity(1);
+            }
+        }
+
+        .line {
+            position: absolute;
             bottom: 0;
-            display: flex;
-            flex-direction: column;
+            height: 3px;
+            background-color: #6C5E45;
+            border-radius: 1000px;
+            
+            &.lv1{
+                width: 80px;
+                transform: translate(12.5px ,0);
+            }
+            &.lv2{
+                width: 80px;
+                transform: translate(118.5px ,0);
+            }
+            &.lv3{
+                width: 80px;
+                transform: translate(226.5px ,0);
+            }
+        }
+    }
+    .child{
+        flex: 13;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    #content {
+        #navBar {
+            .menu {
+                .menu_item {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #header {
+        .icon {
+            margin: 0 10px 0 2%;
+            height: 50%;
+
+            img {
+                height: 100%;
+            }
+        }
+
+        .title {
+            font-family: $en-us-font;
+            color: #6C5E45;
+        }
+    }
+
+    #content {
+        &.mobile_mask {
+            background-color: #00000012;
+
+        }
+
+        #navBar {
+            position: absolute;
+            z-index: 9999;
+            width: 40%;
+            box-shadow: black 0px 0px 15px 1px;
+            transform: translateX(-100vw);
+
+            &.active {
+                animation-name: openNavBar;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+            }
+
+            &.closing {
+                animation-name: closeNavBar;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+            }
+
+            .menu {
+                .menu_item {
+                    font-size: 20px;
+                }
+            }
 
             .image {
                 width: 100%;
-                height: 50%;
+                height: 100%;
                 position: relative;
                 overflow: hidden;
                 opacity: 0.16;
 
                 &.pizza {
+                    position: absolute;
+                    height: max-content;
+                    width: 75%;
+                    bottom: 15%;
+                    right: 0;
+
                     img {
-                        position: absolute;
-                        width: 110%;
-                        bottom: 0;
-                        transform: translate(45px, 80px);
+                        transform: translate(45px, 0);
+                        width: 100%;
                     }
                 }
 
                 &.rice {
+                    position: absolute;
+                    height: max-content;
+                    width: 65%;
+                    bottom: 0;
+
                     img {
-                        position: absolute;
-                        width: 70%;
-                        bottom: 0;
-                        transform: translate(-50px, 25px);
+                        transform: translate(-45px, 20px);
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        .blurContent {
+            opacity: 70%;
+            filter: blur(1px);
+        }
+    }
+}
+
+// @media screen and (max-width: 576px) {
+//     #content {
+//         #navBar {
+//             width: 40%;
+
+//             .menu {
+//                 .menu_item {
+//                     font-size: 20px;
+//                 }
+//             }
+
+//             .image {
+//                 width: 100%;
+//                 height: 100%;
+//                 position: relative;
+//                 overflow: hidden;
+//                 opacity: 0.16;
+
+//                 &.pizza {
+//                     position: absolute;
+//                     height: max-content;
+//                     width: 75%;
+//                     bottom: 15%;
+//                     right: 0;
+
+//                     img {
+//                         transform: translate(45px, 0);
+//                         width: 100%;
+//                     }
+//                 }
+
+//                 &.rice {
+//                     position: absolute;
+//                     height: max-content;
+//                     width: 65%;
+//                     bottom: 0;
+
+//                     img {
+//                         transform: translate(-45px, 20px);
+//                         width: 100%;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+@media screen and (max-width: 486px) {
+
+    #header {
+        height: $mobile-header-height;
+
+        .mobile {
+            display: flex;
+            align-items: center;
+            height: 100%;
+
+            .burgerMenuIcon {
+                margin-left: 10px;
+                height: 30px;
+                flex: 1;
+
+                img {
+                    height: 100%;
+                }
+            }
+
+            .banner {
+                height: 55px;
+                flex: 8;
+                text-align: center;
+
+                img {
+                    height: 100%;
+                }
+            }
+
+            .notify {
+                flex: 1;
+                height: 38px;
+                margin-right: 10px;
+
+                img {
+                    height: 100%
+                }
+
+                ;
+            }
+        }
+
+        .desktop {
+            display: none;
+        }
+    }
+
+    #content {
+        height: calc(100vh - $mobile-header-height);
+
+        #navBar {
+            width: 70%;
+
+            .menu {
+                .menu_item {
+                    font-size: 20px;
+                }
+            }
+
+            .image {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                overflow: hidden;
+                opacity: 0.16;
+
+                &.pizza {
+                    position: absolute;
+                    height: max-content;
+                    width: 85%;
+                    bottom: 15%;
+                    right: 0;
+
+                    img {
+                        transform: translate(45px, 0);
+                        width: 100%;
+                    }
+                }
+
+                &.rice {
+                    position: absolute;
+                    height: max-content;
+                    width: 75%;
+                    bottom: 0;
+
+                    img {
+                        transform: translate(-45px, 20px);
+                        width: 100%;
                     }
                 }
             }

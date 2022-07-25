@@ -1,0 +1,368 @@
+$en-us-font: 'Hanna',
+sans-serif;
+$zh-tw-font: 'jf open 粉圓字型';
+
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
+@font-face {
+    font-family: $zh-tw-font;
+    src: url('../../Assets/fonts/jf-openhuninn-1.1.ttf');
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 100%;
+    }
+}
+
+@keyframes openLine {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 85%;
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 100%;
+    }
+}
+
+@keyframes fadeInRight {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateX(0px);
+        opacity: 30%;
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        transform: translateX(50px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateX(0px);
+        opacity: 30%;
+    }
+}
+
+/* End Animation */
+#home {
+    * {
+        transition: all 0.8s ease;
+    }
+
+    &::selection {
+        background: #6C5E45;
+        color: #fff;
+    }
+
+    &::placeholder {
+        color: #AA9D87;
+    }
+
+    background-color: #FFFCF8;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .main {
+        width: 800px;
+        display: grid;
+
+        * {
+            text-align: center;
+            margin: 0;
+        }
+
+        .pizza {
+            width: 45vw;
+            position: fixed;
+            top: -190px;
+            left: -90px;
+            animation-name: fadeInRight;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        .rice {
+            width: 25vw;
+            position: fixed;
+            bottom: -50px;
+            right: -50px;
+            animation-name: fadeInLeft;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        .title {
+            &.title_active {
+                * {
+                    font-size: 3vw;
+                    cursor: pointer;
+                }
+            }
+
+            * {
+                opacity: 0%;
+                font-size: 5vw;
+                color: #6C5E45;
+                font-family: $en-us-font;
+                animation-name: fadeInUp;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                animation-delay: 1s;
+            }
+
+
+            .logo {
+                width: 10vw;
+
+                &.logo_active {
+                    width: 5vw;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .bottom {
+            button {
+                opacity: 0%;
+                width: 120px;
+                border: 3px solid #6C5E45;
+                border-radius: 18px;
+                animation-name: fadeInUp;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                animation-delay: 1.5s;
+
+                &.about_btn {
+                    color: #6C5E45;
+                    background-color: #FFFCF8;
+                }
+
+                &.login_btn {
+                    color: #fff;
+                    background-color: #6C5E45;
+                }
+            }
+        }
+
+        .line {
+            border: 1px solid #AA9D87;
+            max-width: 80vw;
+            animation-name: openLine;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        .middle_before {
+            * {
+                opacity: 0%;
+                color: #6C5E45;
+                animation-name: fadeInDown;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                animation-delay: 1s;
+            }
+        }
+
+        .middle_after {
+            background-color: #fff;
+            border: 1px solid #AA9D87;
+            border-radius: 25px;
+            color: hsl(38, 17%, 60%);
+
+            button {
+                width: 250px;
+                background-color: #fff;
+                border-radius: 25px;
+                border: 1px solid #AA9D87;
+                color: #AA9D87;
+            }
+
+            span {
+                font-family: $en-us-font;
+                font-weight: 400;
+            }
+
+            input {
+                width: 422px;
+                background-color: #fff;
+                border-radius: 10px;
+                border: 1px solid #AA9D87;
+                color: #AA9D87;
+                text-align: left;
+            }
+
+            .about_block {
+                div {
+                    width: 422px;
+                    height: 256px;
+                }
+
+                .byWHO {
+                    color: #FFBCA7;
+                    text-align: right;
+                    height: min-content !important;
+                }
+            }
+
+            .login_block {
+                .login {
+                    color: #6C5E45;
+                }
+
+                .function_txt {
+                    justify-self: center;
+                    text-align: right !important;
+
+                    span {
+                        &:hover {
+                            color: #6C5E45;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .line2 {
+                    border-bottom: 1px solid #AA9D87;
+                    max-width: 90vw;
+                }
+
+                .loginbtn {
+                    background-color: #6C5E45;
+                    color: #fff;
+                }
+
+                .google_btn {
+                    &:hover {
+                        box-shadow: 3px 3px 0px #FFC940;
+                    }
+                }
+
+                .line_btn {
+                    &:hover {
+                        box-shadow: 3px 3px 0px #FFBCA7;
+                    }
+                }
+            }
+
+
+        }
+    }
+
+    #Copyright {
+        color: #AA9D87;
+        position: fixed;
+        bottom: 0px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #home {
+        .main {
+            .pizza {
+                width: 60vw;
+                top: -100px;
+                left: -50px;
+            }
+
+            .rice {
+                width: 40vw;
+                bottom: -50px;
+                right: -50px;
+            }
+
+            .title {
+                &.title_active {
+                    * {
+                        font-size: 8vw;
+                    }
+                }
+
+                * {
+                    font-size: 10vw;
+                }
+
+                .logo {
+                    width: 20vw;
+
+                    &.logo_active {
+                        width: 10vw;
+                    }
+                }
+            }
+
+            .middle_after {
+                input {
+                    width: 300px;
+                }
+
+                .about_block {
+                    div {
+                        width: 300px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 486px) {
+    #home {
+        .main {
+            .pizza {
+                width: 70vw;
+                top: -70px;
+                left: -30px;
+            }
+
+            .rice {
+                width: 50vw;
+                bottom: -30px;
+                right: -30px;
+            }
+
+            .middle_after {
+                input {
+                    width: 250px;
+                }
+
+                .about_block {
+                    div {
+                        width: 250px;
+                    }
+
+                    .byWHO {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}

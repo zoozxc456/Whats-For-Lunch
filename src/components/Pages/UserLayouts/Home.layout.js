@@ -6,35 +6,41 @@ import pizza from "../../Assets/images/pizza-w.png"
 import rice from "../../Assets/images/rice-w.png"
 import more from "../../Assets/images/more.png"
 import banner from "../../Assets/images/banner.png"
+// import LogoutDialog from "./LogoutDialog"
 import { useState, useEffect } from "react"
 const HomeLayout = ({ currentPage, childComponent }) => {
     const [mobileNavStatus, setMobileNavStatus] = useState("init");
+    // const [isShowLogoutDialog, setIsShowLogoutDialog] = useState(false);
+    
     const [isShowMobileNav, setShowMobileNav] = useState(false);
+
     const logout = () => {
+        console.log("logout")
+        // setIsShowLogoutDialog(true)
         localStorage.removeItem("accessToken")
         window.location.href = "/"
     }
-
+    
     const handleBurgerMenu = () => {
         console.log(mobileNavStatus)
         setMobileNavStatus(mobileNavStatus === "open" ? "closing" : "open");
     }
     const redirectHandlers = {
-        group: () => window.location.href = "/home",
+        home: () => window.location.href = "/home",
         record: () => window.location.href = "/record",
-        profile: () => window.location.href = "/profile"
+        profile: () => window.location.href = "/account"
     }
     const handleRedirect = (targetPage) => {
         console.log(targetPage)
-        if (targetPage === "group") {
+        if (targetPage === "home") {
             window.location.href = "/home";
         } else if (targetPage === "record") {
             window.location.href = "/record";
-        } else if (targetPage === "profile") {
-            window.location.href = "/profile";
+        } else if (targetPage === "account") {
+            window.location.href = "/account";
         }
         // switch (targetPage) {
-        //     case "group":
+        //     case "home":
         //         window.location.href = "/home";
         //         break;
         //     case "record":
@@ -89,14 +95,14 @@ const HomeLayout = ({ currentPage, childComponent }) => {
                         mobileNavStatus === "open" ? style.active :
                             mobileNavStatus === "closing" ? style.closing : ""
                     }
-                    xs={12} md={3} xl={2} style={{ "padding": "0" }}
+                    xs={12} md={3} xl={3} xxl={2} style={{ "padding": "0" }}
                 >
                     <div className={style.menu}>
                         <div
-                            className={`${style.menu_item} ${currentPage === "group" ? style.active : ""}`}
-                            onClick={redirectHandlers.group}
+                            className={`${style.menu_item} ${currentPage === "home" ? style.active : ""}`}
+                            onClick={redirectHandlers.home}
                         >
-                            <div>我的群組</div>
+                            <div>首頁</div>
                         </div>
                         <div
                             className={`${style.menu_item} ${currentPage === "record" ? style.active : ""}`}
@@ -104,9 +110,9 @@ const HomeLayout = ({ currentPage, childComponent }) => {
                             <div>訂餐紀錄</div>
                         </div>
                         <div
-                            className={`${style.menu_item} ${currentPage === "profile" ? style.active : ""}`}
+                            className={`${style.menu_item} ${currentPage === "account" ? style.active : ""}`}
                             onClick={redirectHandlers.profile}>
-                            <div>個人資料</div>
+                            <div>我的帳戶</div>
                         </div>
                         <div className={`${style.menu_item}`} onClick={logout}>
                             <div>登出</div>
@@ -120,19 +126,11 @@ const HomeLayout = ({ currentPage, childComponent }) => {
                     </div>
                 </Col>
                 <Col
-                    xs={12} md={9} xl={10}
-                    style={{ "padding": "0" ,"display":"flex","flexDirection":"column"}}
+                    xs={12} md={9} xl={9} xxl={10}
+                    style={{ "padding": "0" }}
                     className={mobileNavStatus === "open" ? style.blurContent : ""}
                 >
-                    <div id={style.sub_feature}>
-                        <div className={`${style.item} ${style.active}`}>帳戶</div>
-                        <div className={style.item}>通知</div>
-                        <div className={style.item}>錢包</div>
-                        <div className={`${style.line} ${style.lv1}`}></div>
-                    </div>
-                    <div className={style.child}>
-                        {childComponent}
-                    </div>
+                    {childComponent}
                 </Col>
             </Row>
         </>

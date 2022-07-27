@@ -149,7 +149,7 @@ $zh-tw-font: 'jf open 粉圓字型';
             &.pizza {
                 position: absolute;
                 height: max-content;
-                width: 80%;
+                width: 90%;
                 right: 0;
                 bottom: 20%;
 
@@ -186,7 +186,7 @@ $zh-tw-font: 'jf open 粉圓字型';
             filter: opacity(0.6);
             margin: 0 25px;
             text-align: center;
-
+            cursor: pointer;
             &.active {
                 filter: opacity(1);
             }
@@ -456,6 +456,44 @@ $zh-tw-font: 'jf open 粉圓字型';
                         transform: translate(-45px, 20px);
                         width: 100%;
                     }
+                }
+            }
+        }
+        #sub_feature {
+            font-size: 24px;
+            flex: 1;
+            justify-content: center;
+            width: max-content;
+            margin-left: auto;
+            margin-right: auto;
+            .item {
+                filter: opacity(0.6);
+                margin: 0 20px;
+                text-align: center;
+                &.active {
+                    filter: opacity(1);
+                }
+            }
+    
+            .line {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 3px;
+                background-color: #6C5E45;
+                border-radius: 1000px;
+                
+                &.lv1{
+                    width: 65px;
+                    transform: translate(12.5px ,0);
+                }
+                &.lv2{
+                    width: 65px;
+                    transform: translate(100.5px ,0);
+                }
+                &.lv3{
+                    width: 65px;
+                    transform: translate(189.5px ,0);
                 }
             }
         }

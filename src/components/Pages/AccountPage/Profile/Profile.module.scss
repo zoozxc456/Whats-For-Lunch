@@ -1,0 +1,226 @@
+$en-us-font: 'Hanna';
+$zh-tw-font: 'jf open 粉圓字型';
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
+@font-face {
+    font-family: $zh-tw-font;
+    src: url('../../../Assets/fonts/jf-openhuninn-1.1.ttf');
+}
+
+.container {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 80%;
+    width: 90%;
+    background-color: #FFFCF8;
+    border: 4px solid #6A5F48;
+    border-radius: 40px;
+    color: #6C5E45;
+
+    .header {
+        height: 25%;
+        width: 100%;
+        margin: auto;
+        font-size: 48px;
+        font-family: $en-us-font, $zh-tw-font;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .body {
+        height: 75%;
+        width: 660px;
+        display: flex;
+        flex-direction: column;
+        font-size: 30px;
+        margin: auto;
+
+        .form_container {
+            width: 100%;
+            max-height: 100px;
+            min-height: 100px;
+            margin: 0 auto 10px;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            font-family: $en-us-font;
+
+            .title {
+                width: 150px;
+                margin-right: 10px;
+                font-weight: 700;
+            }
+
+            .content {
+                max-width: 50%;
+                min-width: 50%;
+                max-height: 125px;
+                overflow-y: scroll;
+                word-break: break-all;
+
+                button {
+                    font-size: 24px;
+                    background-color: #6C5E45;
+                    border: #6A5F48;
+                    border-radius: 1000px;
+                    width: 175px;
+                    padding: 3.5px 0;
+                    color: #FFFFFF;
+                    font-weight: 500;
+
+                    &:hover {
+                        opacity: 0.8;
+                        transform: scale(0.9);
+                    }
+
+                    // &:active {
+                    //     transform: scale(0.9);
+                    // }
+                }
+            }
+
+            .image {
+                margin-left: 10px;
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+
+                img {
+                    height: 100%;
+                }
+
+                &:hover {
+                    opacity: 0.8;
+                    transform: scale(0.9);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-height:920px) {
+    .container {
+        .body {
+            .form_container {
+                max-height: 150px;
+                min-height: 150px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .container {
+        .header {
+            height: 20%;
+            font-size: 40px;
+        }
+
+        .body {
+            height: 80%;
+            width: 500px;
+
+            .form_container {
+                max-width: 100%;
+                min-width: 100%;
+
+                .title {
+                    font-size: 26px;
+                }
+
+                .content {
+                    font-size: 24px;
+                }
+            }
+        }
+
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    $header-height: 20%;
+
+    .container {
+        .header {
+            font-size: 36px;
+        }
+
+        .body {
+            height: calc(100% - $header-height);
+            width: 80%;
+            font-size: 20px;
+
+            .form_container {
+                display: block;
+                font-size: 18px;
+                text-align: center;
+                position: relative;
+                max-height: 150px;
+                min-height: 100px;
+
+                .title {
+                    height: 36px;
+                    width: 100%;
+                    font-size: 24px;
+                    margin-right: 0;
+                }
+
+                .content {
+                    font-size: 24px;
+                    max-width: 60%;
+                    min-width: 60%;
+                    max-height: 100px;
+                    overflow-y: scroll;
+                    margin: auto;
+
+                    button {
+                        font-size: 20px;
+                        width: 80%;
+                        padding: 5px 0;
+                    }
+                }
+
+                .image {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    transform: translate(-10px, 36px);
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 486px) {
+    .container {
+        .header {
+            font-size: 28px;
+        }
+
+        .body {
+            width: 90%;
+
+            .form_container {
+                width: 100%;
+                min-height: 75px;
+
+                .title {
+                    font-size: 20px;
+                }
+
+                .content {
+                    font-size: 18px;
+
+                    button {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -8,8 +8,9 @@ import IndexPage from './components/Pages/IndexPage/IndexPage';
 import RegisterPage from "./components/Pages/RegisterPage/RegisterPage";
 import HomePage from "./components/Pages/HomePage/HomePage";
 import OrderPage from "./components/Pages/OrderPage/OrderPage";
-import Profile from "./components/Pages/ProfilePage/ProfilePage"
+import AccountPage from "./components/Pages/AccountPage/AccountPage"
 import AdministratorPage from "./components/Pages/AdministratorPage/AdministratorPage";
+import RecordPage from "./components/Pages/RecordPage/RecordPage";
 
 function App() {
   return (
@@ -23,16 +24,24 @@ function App() {
           </AuthRoute>
 
           {/* Below Routes For MemberUser */}
-          <AuthRoute path="/Profile" Permission="user">
-            <Profile />
-          </AuthRoute>
-          <AuthRoute path="/Order" Permission="user">
-            <OrderPage />
-          </AuthRoute>
-
-          <AuthRoute path="/Home" Permission="user">
+           <AuthRoute path="/Home" Permission="user">
+            {/* 首頁 */}
             <HomePage />
           </AuthRoute>
+
+          <AuthRoute path="/Record" Permission="user">
+            {/* 訂餐紀錄 */}
+            <RecordPage />
+          </AuthRoute>
+
+          <AuthRoute path="/Account" Permission="user">
+            {/* 我的帳戶 */}
+            <AccountPage />
+          </AuthRoute>
+
+          {/* <AuthRoute path="/Order" Permission="user">
+            <OrderPage />
+          </AuthRoute> */}
 
           {/* Below Route For Guest */}
 

@@ -6,21 +6,29 @@ import pizza from "../../Assets/images/pizza-w.png"
 import rice from "../../Assets/images/rice-w.png"
 import more from "../../Assets/images/more.png"
 import banner from "../../Assets/images/banner.png"
-// import LogoutDialog from "./LogoutDialog"
+import LogoutDialog from "./LogoutDialog"
 import { useState, useEffect } from "react"
 const HomeLayout = ({ currentPage, childComponent }) => {
     const [mobileNavStatus, setMobileNavStatus] = useState("init");
-    // const [isShowLogoutDialog, setIsShowLogoutDialog] = useState(false);
-    
-    const [isShowMobileNav, setShowMobileNav] = useState(false);
+    // const [isShowMobileNav, setShowMobileNav] = useState(false);
 
-    const logout = () => {
-        console.log("logout")
-        // setIsShowLogoutDialog(true)
-        localStorage.removeItem("accessToken")
-        window.location.href = "/"
+    const [isShowDialog, setIsShowDialog] = useState(false);
+    const [dialog, setDialog] = useState(null);
+
+    const showDialog = () => {
+        setIsShowDialog(true)
     }
-    
+    const closeDialog = () => {
+        setIsShowDialog(false)
+    }
+    useEffect(() => {
+        if (isShowDialog) {
+            setDialog(<LogoutDialog closeDialog={closeDialog}/>) 
+        }else{
+            setDialog(null) 
+        }
+    }, [isShowDialog]);
+
     const handleBurgerMenu = () => {
         console.log(mobileNavStatus)
         setMobileNavStatus(mobileNavStatus === "open" ? "closing" : "open");
@@ -68,6 +76,7 @@ const HomeLayout = ({ currentPage, childComponent }) => {
     return (
         <>
             <div id={style.header}>
+                {dialog}
                 <div className={style.mobile}>
                     <div className={style.burgerMenuIcon} onClick={handleBurgerMenu}>
                         <img src={more} alt="logo" />
@@ -114,7 +123,7 @@ const HomeLayout = ({ currentPage, childComponent }) => {
                             onClick={redirectHandlers.profile}>
                             <div>我的帳戶</div>
                         </div>
-                        <div className={`${style.menu_item}`} onClick={logout}>
+                        <div className={`${style.menu_item}`} onClick={showDialog}>
                             <div>登出</div>
                         </div>
                     </div>

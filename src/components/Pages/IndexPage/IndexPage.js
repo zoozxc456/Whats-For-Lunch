@@ -81,7 +81,7 @@ const IndexPageComponent = () => {
     }
     const LoginComponent = (
         <Col className={style.login_block}>
-            <div className={`${style.login} mt-5`}>
+            <div className={`${style.login} mt-4`}>
                 <b>登入</b>
                 <span>Login</span>
             </div>
@@ -96,7 +96,7 @@ const IndexPageComponent = () => {
 
             </div>
             <div className={`${style.line2} mx-auto`}></div>
-            <div className='mb-5'>
+            <div className='mb-4'>
                 <div className="mb-2 mt-3">
                     <div className="my-1">
                         <Button className={`${style.loginbtn} fs-6`} onClick={checkLogin}>登入</Button>

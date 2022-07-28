@@ -1,7 +1,7 @@
 import UserLayout from "../UserLayouts/User.layout"
 import style from "./HomePage.module.scss"
 // import { Col, Row } from "react-bootstrap"
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import CreateDialog from './CreateDialogs/CreateDialogs';
 import Order from './Order/Order';
 import Store from './Store/Store';
@@ -87,7 +87,14 @@ const HomePage = () => {
                     紀錄
                 </div>
                 <div className={getLineStyle()}></div>
+
+                {/* 搜尋列，無RWD */}
+                <div id={style.searchBar}>
+                    <input placeholder="輸入揪團代碼"></input>
+                    <button>加入</button>
+                </div>
             </div>
+            {/* 子畫面 */}
             {component.content}
 
         </div>
@@ -95,7 +102,7 @@ const HomePage = () => {
 
     return (
         <>
-            <CreateDialog/>
+            <CreateDialog />
             <UserLayout currentPage={"home"} childComponent={view} />
         </>
     )

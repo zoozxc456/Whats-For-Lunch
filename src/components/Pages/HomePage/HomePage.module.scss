@@ -12,6 +12,7 @@ $zh-tw-font: 'jf open 粉圓字型';
     width: 100%;
     height: 100%;
     position: relative;
+
     #sub_feature {
         height: 42px;
         min-width: 100%;
@@ -62,13 +63,39 @@ $zh-tw-font: 'jf open 粉圓字型';
                 transform: translate(521%, 0);
             }
         }
+
+        #searchBar {
+            font-size: 18px;
+            position: fixed;
+            right: 60px;
+            top: 120px;
+
+            input {
+                color: #AA9D87;
+                border-radius: 20px;
+                border: 1px solid #AA9D87;
+                padding: 2px 15px;
+                margin-right: 10px;
+            }
+
+            button {
+                background-color: #AA9D87;
+                color: #fff;
+                border-radius: 20px;
+                font-weight: 500;
+                border: none;
+                padding: 4px 13px;
+            }
+        }
     }
+
+
 
     .container {
         position: absolute;
-        top:50%;
+        top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         height: 80%;
         width: 90%;
         background-color: #FFFCF8;
@@ -319,11 +346,14 @@ $zh-tw-font: 'jf open 粉圓字型';
                 .form_container {
                     width: 100%;
                     min-height: 75px;
-                    .title{
+
+                    .title {
                         font-size: 20px;
                     }
+
                     .content {
                         font-size: 18px;
+
                         button {
                             width: 100%;
                         }

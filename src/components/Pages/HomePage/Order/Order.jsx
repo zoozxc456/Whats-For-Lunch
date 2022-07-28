@@ -1,5 +1,5 @@
 import style from "./Order.module.scss"
-import { useState } from "react";
+// import { useState, useEffect } from "react";
 const Order = () => {
 
     return (
@@ -31,7 +31,7 @@ const Order = () => {
                         </div>
 
                     </div>
-                    
+
                     <div className={style.order_ing}>
 
                         <div className={style.row}>
@@ -110,7 +110,7 @@ const Order = () => {
                         </div>
 
                     </div>
-                    
+
                 </div>
             </div>
         </div>

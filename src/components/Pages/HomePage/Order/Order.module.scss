@@ -47,11 +47,17 @@ $col_right: 1;
             // background-color: rgb(255,255,255,0.5);
 
             .order_ing {
-                border: 2px solid #6C5E45;
+                border: 2px solid #AA9D87;
                 border-radius: 10px;
                 padding: 10px 25px;
                 position: relative;
                 margin: 0 0 10px 0;
+                transform: scale(0.98);
+
+                &:hover{
+                    border: 2px solid #6C5E45;
+                    transform: scale(1);
+                }
 
                 * {
                     color: #6C5E45;
@@ -112,10 +118,15 @@ $col_right: 1;
                 padding: 10px 25px;
                 position: relative;
                 margin: 0 0 10px 0;
+                transform: scale(0.98);
+
+                &:hover{
+                    border: 2px solid #6C5E45;
+                    transform: scale(1);
+                }
 
                 * {
                     color: #AA9D87;
-                    ;
                     font-size: 20px;
                     margin: 2px 0;
                     font-weight: 600;

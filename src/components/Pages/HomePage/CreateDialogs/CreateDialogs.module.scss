@@ -1,0 +1,22 @@
+#create_btn {
+    position: fixed;
+    bottom: 20px;
+    width: 54px;
+    border-radius: 50px;
+    background-color: #6C5E45;
+    opacity: 0.9;
+    border: 2px solid #6c5f45;
+    right: 2vw;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    z-index: 3;
+    cursor: pointer;
+
+    &:hover{
+        opacity: 1;
+    }
+    .circle {
+        padding: 11px;
+    }
+}

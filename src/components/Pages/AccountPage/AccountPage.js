@@ -1,6 +1,6 @@
 import UserLayout from "../UserLayouts/User.layout";
 import style from "./AccountPage.module.scss"
-import EditDialog from "./EditProfileDialogs/EditDialog";
+import EditDialog from "./Profile/EditDialogs/EditDialog";
 import Profile from "./Profile/Profile";
 import Notify from "./Notify/Notify";
 import Wallet from "./Wallet/Wallet";

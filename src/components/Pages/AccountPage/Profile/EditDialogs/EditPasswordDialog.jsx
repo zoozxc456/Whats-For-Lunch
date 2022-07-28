@@ -1,6 +1,6 @@
 import style from "./EditDialog.module.scss"
 import { useRef,useState } from "react"
-import { passwordIsMeetRule } from "../../../../utils/meetRule";
+import { passwordIsMeetRule } from "../../../../../utils/meetRule";
 
 const EditPasswordDialog = ({ closeDialogHandler, editNewPasswordHandler }) => {
     const newPassword = useRef("");

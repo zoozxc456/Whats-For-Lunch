@@ -2,11 +2,11 @@ import UserLayout from "../UserLayouts/User.layout"
 import style from "./HomePage.module.scss"
 // import { Col, Row } from "react-bootstrap"
 import { useState,useEffect } from "react";
-import Notify from '../Notify/Notify';
+import CreateDialog from './CreateDialogs/CreateDialogs';
 import Order from './Order/Order';
-// import Store from './Store/Store';
-// import Group from './Group/Group';
-// import Record from './Record/Record';
+import Store from './Store/Store';
+import Group from './Group/Group';
+import Record from './Record/Record';
 
 const HomePage = () => {
     const [component, setComponent] = useState({ type: "", content: null });
@@ -21,19 +21,19 @@ const HomePage = () => {
         store: () => {
             setComponent({
                 type: "Store",
-                // content: <Store />
+                content: <Store />
             })
         },
         group: () => {
             setComponent({
                 type: "Group",
-                // content: <Group />
+                content: <Group />
             })
         },
         record: () => {
             setComponent({
                 type: "Record",
-                // content: <Record />
+                content: <Record />
             })
         },
     }
@@ -95,7 +95,7 @@ const HomePage = () => {
 
     return (
         <>
-            <Notify/>
+            <CreateDialog/>
             <UserLayout currentPage={"home"} childComponent={view} />
         </>
     )

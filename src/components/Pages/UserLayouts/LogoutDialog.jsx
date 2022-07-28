@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from "../AccountPage/EditProfileDialogs/EditDialog.module.scss";
+import style from "../AccountPage/Profile/EditDialogs/EditDialog.module.scss";
 import icon from "../../Assets/images/logo.png"
 const LogoutDialog = ({closeDialog}) => {
     const [closingStyle,setClosingStyle]=useState(false)

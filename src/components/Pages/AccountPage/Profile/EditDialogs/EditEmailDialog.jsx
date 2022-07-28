@@ -1,6 +1,6 @@
 import style from "./EditDialog.module.scss"
 import { useRef,useState } from "react"
-import { emailIsMeetRule } from "../../../../utils/meetRule";
+import { emailIsMeetRule } from "../../../../../utils/meetRule";
 const EditEmailDialog = ({ closeDialogHandler, editNewEmailHandler }) => {
     const newEmail = useRef("");
     const [closingStyle,setClosingStyle]=useState(false)

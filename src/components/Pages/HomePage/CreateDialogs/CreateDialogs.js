@@ -9,7 +9,9 @@ const CreateDialogBtn = () => {
         <div id={style.create_btn}>
             <div className={style.circle}>
                 <img src={Plus} className="" alt="Plus" style={{ width: '27px' }} />
+                 <span className={style.tooltiptext}>新增揪團活動！</span>
             </div>
+           
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import HomeLayout from "../UserLayouts/Home.layout";
+import UserLayout from "../UserLayouts/User.layout";
 import style from "./AccountPage.module.scss"
 import EditDialog from "./EditProfileDialogs/EditDialog";
 import Profile from "./Profile/Profile";
@@ -95,8 +95,7 @@ const AccountPage = () => {
             editType={editType}
             closeDialog={closeDialog}
         />
-        <HomeLayout currentPage={"account"} childComponent={view} />
-        {/* <Profile editHandlers={editHandlers}/> */}
+        <UserLayout currentPage={"account"} childComponent={view} />
     </>
 }
 

@@ -1,5 +1,5 @@
 import { Row, Col } from "react-bootstrap"
-import style from "./Home.layout.module.scss"
+import style from "./User.layout.module.scss"
 import logo from "../../Assets/images/logo.png"
 import notification from "../../Assets/images/notification.png"
 import pizza from "../../Assets/images/pizza-w.png"
@@ -8,7 +8,7 @@ import more from "../../Assets/images/more.png"
 import banner from "../../Assets/images/banner.png"
 import LogoutDialog from "./LogoutDialog"
 import { useState, useEffect } from "react"
-const HomeLayout = ({ currentPage, childComponent }) => {
+const UserLayout = ({ currentPage, childComponent }) => {
     const [mobileNavStatus, setMobileNavStatus] = useState("init");
     // const [isShowMobileNav, setShowMobileNav] = useState(false);
 
@@ -146,4 +146,4 @@ const HomeLayout = ({ currentPage, childComponent }) => {
     )
 }
 
-export default HomeLayout;
+export default UserLayout;

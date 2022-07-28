@@ -1,0 +1,44 @@
+#order {
+    height: 100%;
+    width: 90%;
+    // background-color: aquamarine;
+    margin: auto;
+
+    .start {
+
+        // background-color: rgb(205, 191, 182);
+        .title {
+            color: #6C5E45;
+            font-size: 25px;
+            font-weight: 500;
+            margin: 20px 10px 0;
+        }
+
+        .orders {
+
+            // background-color: rgb(255,255,255,0.5);
+            .order_ing {
+                border: 2px solid #AA9D87;
+                border-radius: 10px;
+                padding: 10px;
+
+                * {
+                    color: #6C5E45;
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    .end {
+
+        // background-color: rgb(255, 117, 31,0.5);
+        .title {
+            color: #6C5E45;
+            font-size: 25px;
+            font-weight: 500;
+            margin: 20px 10px 0;
+        }
+    }
+}

@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterPage.css';
 import Header from '../Header/Header';
-import Aside from '../Aside/Aside';
-import Notify from '../Notify/Notify';
 
 /* Import Components */
 import Register from './Register';
@@ -35,8 +33,6 @@ const RegisterPage = () => {
     return (
         <div>
             <Header />
-            <Aside />
-            <Notify />
 
             <div id='under_index' className="mx-auto my-0">
                 {content}

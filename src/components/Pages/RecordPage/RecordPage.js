@@ -1,4 +1,4 @@
-import HomeLayout from "../UserLayouts/Home.layout";
+import UserLayout from "../UserLayouts/User.layout";
 import style from "./RecordPage.module.scss"
 import { useState, useEffect } from "react";
 const RecordPage = () => {
@@ -193,7 +193,7 @@ const RecordPage = () => {
         </>
     )
     return <>
-        <HomeLayout currentPage={"record"} childComponent={view} />
+        <UserLayout currentPage={"record"} childComponent={view} />
     </>
 }
 export default RecordPage;

@@ -7,7 +7,6 @@ import AuthRoute from "./AuthRouter";
 import IndexPage from './components/Pages/IndexPage/IndexPage';
 import RegisterPage from "./components/Pages/RegisterPage/RegisterPage";
 import HomePage from "./components/Pages/HomePage/HomePage";
-import OrderPage from "./components/Pages/OrderPage/OrderPage";
 import AccountPage from "./components/Pages/AccountPage/AccountPage"
 import AdministratorPage from "./components/Pages/AdministratorPage/AdministratorPage";
 import RecordPage from "./components/Pages/RecordPage/RecordPage";
@@ -38,10 +37,6 @@ function App() {
             {/* 我的帳戶 */}
             <AccountPage />
           </AuthRoute>
-
-          {/* <AuthRoute path="/Order" Permission="user">
-            <OrderPage />
-          </AuthRoute> */}
 
           {/* Below Route For Guest */}
 

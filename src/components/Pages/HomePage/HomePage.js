@@ -88,11 +88,6 @@ const HomePage = () => {
                 </div>
                 <div className={getLineStyle()}></div>
 
-                {/* 搜尋列，無RWD */}
-                <div id={style.searchBar}>
-                    <input placeholder="輸入揪團代碼"></input>
-                    <button>加入</button>
-                </div>
             </div>
             {/* 子畫面 */}
             {component.content}
@@ -102,7 +97,7 @@ const HomePage = () => {
 
     return (
         <>
-            <CreateDialog />
+            <CreateDialog  componentType={component}/>
             <UserLayout currentPage={"home"} childComponent={view} />
         </>
     )

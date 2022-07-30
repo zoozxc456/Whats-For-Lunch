@@ -63,30 +63,6 @@ $zh-tw-font: 'jf open 粉圓字型';
                 transform: translate(521%, 0);
             }
         }
-
-        #searchBar {
-            font-size: 18px;
-            position: fixed;
-            right: 60px;
-            top: 120px;
-
-            input {
-                color: #AA9D87;
-                border-radius: 20px;
-                border: 1px solid #AA9D87;
-                padding: 2px 15px;
-                margin-right: 10px;
-            }
-
-            button {
-                background-color: #AA9D87;
-                color: #fff;
-                border-radius: 20px;
-                font-weight: 500;
-                border: none;
-                padding: 4px 13px;
-            }
-        }
     }
 
 
@@ -311,11 +287,12 @@ $zh-tw-font: 'jf open 粉圓字型';
                 left: 0;
                 height: 3px;
                 background-color: #6C5E45;
+                background-color: #ffa200;
                 border-radius: 1000px;
 
                 &.lv1 {
                     width: 65px;
-                    transform: translate(30%, 0);
+                    transform: translate(110%, 0);
                 }
 
                 &.lv2 {

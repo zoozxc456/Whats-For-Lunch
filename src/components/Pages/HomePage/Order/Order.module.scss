@@ -1,5 +1,32 @@
 $col_left: 7;
 $col_right: 1;
+#searchBar {
+    font-size: 18px;
+    position: fixed;
+    right: 60px;
+    top: 120px;
+
+    input {
+        color: #AA9D87;
+        border-radius: 20px;
+        border: 1px solid #AA9D87;
+        padding: 2px 15px;
+        margin-right: 10px;
+    }
+
+    button {
+        background-color: #AA9D87;
+        color: #fff;
+        border-radius: 20px;
+        font-weight: 500;
+        border: none;
+        padding: 4px 13px;
+
+        &:hover {
+            background-color: #6C5E45;
+        }
+    }
+};
 
 #order {
     // height: 100%;

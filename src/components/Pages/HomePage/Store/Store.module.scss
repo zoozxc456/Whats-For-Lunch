@@ -1,0 +1,274 @@
+$img-url:"../../../../assets/images/banner.png";
+
+#store {
+    // background-color: aquamarine;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+
+    .function_bar {
+        display: flex;
+        margin: 25px 0;
+
+        .tags {
+            order: 1;
+            display: flex;
+            align-content: center;
+            // background-color: #ffdcdf;
+            flex: 5;
+            width: max-content;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                width: 10px;
+                display: none;
+            }
+
+            &::-webkit-scrollbar-track {
+                border: 1px solid #707070;
+                border-radius: 10px;
+                margin: 7px 0 24px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: #6C5E45;
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                background: #7d6f52;
+            }
+
+            .tag {
+                color: #AA9D87;
+                border: 1px solid #AA9D87;
+                border-radius: 20px;
+                padding: 4px 15px 0 15px;
+                font-weight: 600;
+                margin-right: 10px;
+                cursor: pointer;
+                max-height: 34px;
+
+                min-width: max-content;
+
+                &.active {
+                    color: #FFF;
+                    background-color: #6C5E45;
+                    border: 1px solid #6C5E45;
+                }
+            }
+        }
+
+        .share {
+            order: 2;
+            color: #6C5E45;
+            font-weight: 600;
+            font-size: 20px;
+            display: flex;
+            justify-content: end;
+            margin-left: 12px;
+
+            * {
+                transform: scale(0.8);
+            }
+
+            // Switch Button Style
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+
+                input {
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+
+                    &:before {
+                        position: absolute;
+                        content: "";
+                        height: 26px;
+                        width: 26px;
+                        left: 4px;
+                        bottom: 4px;
+                        background-color: white;
+                        -webkit-transition: .4s;
+                        transition: .4s;
+                    }
+                }
+            }
+
+            input:checked+.slider {
+                background-color: #6C5E45;
+            }
+
+            input:focus+.slider {
+                box-shadow: 0 0 1px #6C5E45;
+            }
+
+            input:checked+.slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+                border-radius: 34px;
+            }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .stores {
+        display: flex;
+        position: absolute;
+        top: 20%;
+        // background-color: rgb(185, 255, 232);
+        flex-wrap: wrap;
+        padding-bottom: 20px;
+
+        // height: 77%;
+
+        max-height: 80%;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+            display: none;
+        }
+
+        &::-webkit-scrollbar-track {
+            border: 1px solid #707070;
+            border-radius: 10px;
+            margin: 7px 0 24px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #6C5E45;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: #7d6f52;
+        }
+
+        .store {
+            border: 2px solid #AA9D87;
+            border-radius: 20px;
+            width: 300px;
+            height: 200px;
+            margin: 0 10px 20px 0;
+            cursor: pointer;
+
+            * {
+                color: #6C5E45;
+            }
+
+            .background {
+                width: 296px;
+                height: 120px;
+                // background-color: #6C5E45;
+                background: url($img-url);
+                border-radius: 18px 18px 0 0;
+
+                img {
+                    display: none;
+                }
+            }
+
+            .details {
+                height: max-content;
+                border-radius: 0 0 18px 18px;
+                // background-color: #6C5E45;
+                padding: 10px 10px;
+
+                .row1 {
+                    display: flex;
+
+                    .name {
+                        flex: 10;
+                        font-weight: 600;
+                    }
+
+                    .option {
+                        flex: 1;
+
+                        img {
+                            width: 20px;
+                        }
+                    }
+                }
+
+                .row2 {
+                    color: #AA9D87;
+                }
+
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #store {
+        .function_bar {
+
+            .tags {
+
+                .tag {}
+            }
+
+            .share {}
+        }
+
+        .stores {
+            // background-color: rgb(247, 244, 204);
+            justify-content: center;
+            padding-right: 4%;
+
+            .store {}
+
+        }
+
+    }
+}
+
+@media screen and (max-width: 330px) {
+    #store {
+        .function_bar {
+
+            .tags {
+
+                .tag {}
+            }
+
+            .share {}
+        }
+
+        .stores {
+            // transform: scale(0.84);
+            //     transform-origin: left top;
+
+            .store {
+                
+            }
+
+        }
+    }
+}

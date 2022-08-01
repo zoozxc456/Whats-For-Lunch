@@ -11,23 +11,25 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        *{
+
+        * {
             width: 250px;
-           margin: 0 20px; 
+            margin: 0 20px;
         }
-        
+
     }
 
     .record_list {
         height: 90vh;
-        overflow-y:scroll;
+        overflow-y: scroll;
         max-height: 78%;
         // background-color: rgb(212, 255, 255);
         padding-bottom: 20px;
         padding-right: 10px;
+
         &::-webkit-scrollbar {
             width: 10px;
-            
+
         }
 
         &::-webkit-scrollbar-track {
@@ -84,4 +86,35 @@
             }
         }
     }
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+
+        .dropdown {}
+
+        .record_list {
+
+
+            .records {
+                .date {}
+
+                .record {
+                    * {
+                        margin: 8px 15px;
+                    }
+                    .item {
+                        font-size: 15px;
+                    }
+
+                    button {
+                        padding: 0px 10px;
+                        flex: none;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+
 }

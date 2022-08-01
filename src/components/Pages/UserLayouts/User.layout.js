@@ -30,7 +30,7 @@ const UserLayout = ({ currentPage, childComponent }) => {
     }, [isShowDialog]);
 
     const handleBurgerMenu = () => {
-        console.log(mobileNavStatus)
+        // console.log(mobileNavStatus)
         setMobileNavStatus(mobileNavStatus === "open" ? "closing" : "open");
     }
     const redirectHandlers = {

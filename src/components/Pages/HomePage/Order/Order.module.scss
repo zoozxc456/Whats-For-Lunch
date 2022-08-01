@@ -1,5 +1,6 @@
 $col_left: 7;
 $col_right: 1;
+
 #searchBar {
     font-size: 18px;
     position: fixed;
@@ -26,19 +27,19 @@ $col_right: 1;
             background-color: #6C5E45;
         }
     }
-};
+}
+
+;
 
 #order {
-    // height: 100%;
     width: 90%;
     // background-color: rgb(206, 245, 232);
-    margin: auto;
+    position: absolute;
+    margin: 0 5%;
 
-    height: 90vh;
+    max-height: 90%;
     overflow-y: auto;
-    max-height: 78%;
     padding-bottom: 20px;
-    // padding-right: 10px;
 
     &::-webkit-scrollbar {
         width: 10px;
@@ -81,7 +82,7 @@ $col_right: 1;
                 margin: 0 0 10px 0;
                 transform: scale(0.98);
 
-                &:hover{
+                &:hover {
                     border: 2px solid #6C5E45;
                     transform: scale(1);
                 }
@@ -147,7 +148,7 @@ $col_right: 1;
                 margin: 0 0 10px 0;
                 transform: scale(0.98);
 
-                &:hover{
+                &:hover {
                     border: 2px solid #6C5E45;
                     transform: scale(1);
                 }
